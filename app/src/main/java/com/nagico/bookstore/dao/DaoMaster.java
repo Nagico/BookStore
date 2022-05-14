@@ -1,4 +1,4 @@
-package com.nagico.bookstore.models.dao;
+package com.nagico.bookstore.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -4,39 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.nagico.bookstore.R
+import com.nagico.bookstore.databinding.FragmentWelcomeBinding
 
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
  */
 class WelcomeFragment : Fragment() {
-    private lateinit var mBtnNavSignIn: Button
-    private lateinit var mBtnNavSignUp: Button
+    private var _binding: FragmentWelcomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_welcome, container, false)
-        mBtnNavSignIn = view.findViewById(R.id.btn_nav_sign_in)
-        mBtnNavSignUp = view.findViewById(R.id.btn_nav_sign_up)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        mBtnNavSignIn.setOnClickListener {
-            it.findNavController().navigate(R.id.action_global_signInFragment)
+        binding.btnNavSignIn.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionGlobalSignInFragment()
+            it.findNavController().navigate(action)
         }
 
-        mBtnNavSignUp.setOnClickListener {
-            it.findNavController().navigate(R.id.action_global_signUpFragment)
+        binding.btnNavSignUp.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionGlobalSignUpFragment()
+            it.findNavController().navigate(action)
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

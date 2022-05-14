@@ -5,19 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import com.nagico.bookstore.R
+import com.nagico.bookstore.databinding.FragmentSignInBinding
 
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
  */
 class SignInFragment : Fragment() {
-    private lateinit var mTxtNavSignUp: TextView
-    private lateinit var mBtnSignIn: Button
-
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,15 +25,23 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        mTxtNavSignUp = view.findViewById(R.id.txt_nav_sign_up)
-        mBtnSignIn = view.findViewById(R.id.btn_sign_in)
+        binding.txtNavSignUp.setOnClickListener {
+            val action = SignInFragmentDirections.actionGlobalSignUpFragment()
+            it.findNavController().navigate(action)
+        }
 
-        mTxtNavSignUp.setOnClickListener {
-            it.findNavController().navigate(R.id.action_global_signUpFragment)
+        binding.btnSignIn.setOnClickListener {
+            Toast.makeText(context, "Sign in", Toast.LENGTH_SHORT).show()
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

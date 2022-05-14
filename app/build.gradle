@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -28,6 +29,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 
@@ -60,6 +65,6 @@ dependencies {
 
 greendao {
     schemaVersion 1
-    daoPackage 'com.nagico.bookstore.models.dao'
+    daoPackage 'com.nagico.bookstore.dao'
     targetGenDir 'src/main/java'
 }

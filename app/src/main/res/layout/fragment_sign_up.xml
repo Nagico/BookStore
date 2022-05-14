@@ -71,7 +71,7 @@
               android:hint="@string/ht_password_confirm"
               app:layout_constraintTop_toBottomOf="@+id/etx_sign_up_password" android:layout_marginTop="16dp"/>
     <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_sign_up"
             android:text="@string/sign_up"
             android:backgroundTint="@color/theme_alert"
             android:layout_width="122dp"

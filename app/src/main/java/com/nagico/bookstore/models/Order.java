@@ -1,13 +1,13 @@
-package com.nagico.bookstore.models.bean;
+package com.nagico.bookstore.models;
 
 import org.greenrobot.greendao.annotation.*;
 
 import java.util.List;
 import org.greenrobot.greendao.DaoException;
-import com.nagico.bookstore.models.dao.DaoSession;
-import com.nagico.bookstore.models.dao.OrderItemDao;
-import com.nagico.bookstore.models.dao.UserDao;
-import com.nagico.bookstore.models.dao.OrderDao;
+import com.nagico.bookstore.dao.DaoSession;
+import com.nagico.bookstore.dao.OrderItemDao;
+import com.nagico.bookstore.dao.UserDao;
+import com.nagico.bookstore.dao.OrderDao;
 
 @Entity
 public class Order {
