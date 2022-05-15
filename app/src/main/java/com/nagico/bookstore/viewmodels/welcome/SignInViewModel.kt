@@ -1,20 +1,27 @@
 package com.nagico.bookstore.viewmodels.welcome
 
+import android.annotation.SuppressLint
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.nagico.bookstore.databinding.FragmentSignInBinding
 import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
 import com.nagico.bookstore.services.AccountService
 import com.nagico.bookstore.services.exception.account.SignInError
+import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
 class SignInViewModel : ViewModel(){
     private val mAccountService = AccountService.instance
     private lateinit var mBinding: FragmentSignInBinding
+    @SuppressLint("StaticFieldLeak")
+    private lateinit var mActivity: FragmentActivity
 
     val username: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -23,17 +30,17 @@ class SignInViewModel : ViewModel(){
         MutableLiveData<String>()
     }
 
-    fun init(binding: FragmentSignInBinding) {
+    fun init(binding: FragmentSignInBinding, activity: FragmentActivity){
         mBinding = binding
+        mActivity = activity
         username.postValue(mAccountService.getDefaultUsername(mBinding.root.context))
-
         mBinding.etxUsername.onFocusChangeListener = clearErrorMsg
         mBinding.etxSignInPassword.onFocusChangeListener = clearErrorMsg
 
     }
 
     val txtNavSignUpOnClickListener = View.OnClickListener {
-        val action = SignInFragmentDirections.actionGlobalSignUpFragment()
+        val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
         it.findNavController().navigate(action)
     }
 
@@ -43,8 +50,10 @@ class SignInViewModel : ViewModel(){
             if (password.value.isNullOrEmpty())  throw SignInError("password", "密码不能为空")
 
             val user = mAccountService.signIn(username.value!!, password.value!!)
+            ViewModelProvider(mActivity).get(BookstoreViewModel::class.java).user = user
             mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
-            Snackbar.make(it, "登录成功", Snackbar.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show()
+            it.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToMainFragment())
         }
         catch (e: SignInError) {
             when (e.code) {

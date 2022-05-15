@@ -20,10 +20,6 @@ class SignUpFragment : Fragment() {
     private val mBinding get() = _binding!!
     private val mModelView: SignUpViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +29,7 @@ class SignUpFragment : Fragment() {
 
         mBinding.lifecycleOwner = this
         mBinding.signUpViewModel = mModelView
-        mModelView.init(mBinding)
+        mModelView.init(mBinding, activity!!)
 
         return view
     }

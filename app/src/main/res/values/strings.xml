@@ -11,4 +11,14 @@
     <string name="sign_up">注册</string>
     <string name="ht_password_confirm">确认密码</string>
     <string name="welcome">✨欢迎来到✨\nBook Store 图书商城</string>
+    <string name="home">首页</string>
+    <string name="shopping_cart">购物车</string>
+    <string name="order">历史订单</string>
+    <string name="sentence">Knowledge is the eye of the mind</string>
+    <string name="all">全部</string>
+    <string name="novel">小说</string>
+    <string name="history">历史</string>
+    <string name="science">科学</string>
+    <string name="art">艺术</string>
+    <string name="commerce">商业</string>
 </resources>

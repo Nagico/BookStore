@@ -13,28 +13,23 @@ import com.nagico.bookstore.databinding.FragmentWelcomeBinding
  * create an instance of this fragment.
  */
 class WelcomeFragment : Fragment() {
-    private var _viewBinding: FragmentWelcomeBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var _binding: FragmentWelcomeBinding? = null
+    private val mBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _viewBinding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        val view = viewBinding.root
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        val view = mBinding.root
 
-        viewBinding.btnNavSignIn.setOnClickListener {
-            val action = WelcomeFragmentDirections.actionGlobalSignInFragment()
+        mBinding.btnNavSignIn.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignInFragment()
             it.findNavController().navigate(action)
         }
 
-        viewBinding.btnNavSignUp.setOnClickListener {
-            val action = WelcomeFragmentDirections.actionGlobalSignUpFragment()
+        mBinding.btnNavSignUp.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignUpFragment()
             it.findNavController().navigate(action)
         }
 
@@ -43,6 +38,6 @@ class WelcomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _viewBinding = null
+        _binding = null
     }
 }

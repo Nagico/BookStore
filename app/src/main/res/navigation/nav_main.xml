@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_main"
+            app:startDestination="@id/page_home">
+
+    <fragment
+            android:id="@+id/page_home"
+            android:name="com.nagico.bookstore.fragments.main.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home"/>
+    <fragment
+            android:id="@+id/page_cart"
+            android:name="com.nagico.bookstore.fragments.main.CartFragment"
+            android:label="fragment_cart"
+            tools:layout="@layout/fragment_cart"/>
+    <fragment
+            android:id="@+id/page_order"
+            android:name="com.nagico.bookstore.fragments.main.OrderFragment"
+            android:label="fragment_order"
+            tools:layout="@layout/fragment_order"/>
+</navigation>

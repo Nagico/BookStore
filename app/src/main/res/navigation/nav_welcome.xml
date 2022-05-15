@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_welcome"
+            app:startDestination="@id/welcomeFragment">
+
+
+    <fragment android:id="@+id/welcomeFragment" android:name="com.nagico.bookstore.fragments.welcome.WelcomeFragment"
+              android:label="fragment_welcome" tools:layout="@layout/fragment_welcome">
+        <action android:id="@+id/action_welcomeFragment_to_signInFragment" app:destination="@id/signInFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/welcomeFragment" app:popUpToInclusive="true"/>
+        <action android:id="@+id/action_welcomeFragment_to_signUpFragment" app:destination="@id/signUpFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/welcomeFragment" app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment android:id="@+id/signUpFragment" android:name="com.nagico.bookstore.fragments.welcome.SignUpFragment"
+              android:label="fragment_sign_up" tools:layout="@layout/fragment_sign_up">
+        <action android:id="@+id/action_signUpFragment_to_mainFragment" app:destination="@id/mainFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/signUpFragment" app:popUpToInclusive="true"/>
+        <action android:id="@+id/action_signUpFragment_to_signInFragment" app:destination="@id/signInFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/signUpFragment" app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment android:id="@+id/signInFragment" android:name="com.nagico.bookstore.fragments.welcome.SignInFragment"
+              android:label="fragment_sign_in" tools:layout="@layout/fragment_sign_in">
+        <action android:id="@+id/action_signInFragment_to_mainFragment" app:destination="@id/mainFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/signInFragment" app:popUpToInclusive="true"/>
+        <action android:id="@+id/action_signInFragment_to_signUpFragment" app:destination="@id/signUpFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@id/signInFragment" app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment android:id="@+id/mainFragment" android:name="com.nagico.bookstore.fragments.main.MainFragment"
+              android:label="MainFragment"/>
+</navigation>

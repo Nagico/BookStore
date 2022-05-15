@@ -1,21 +1,28 @@
 package com.nagico.bookstore.viewmodels.welcome
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentSignUpBinding
 import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
+import com.nagico.bookstore.fragments.welcome.SignUpFragmentDirections
 import com.nagico.bookstore.services.AccountService
 import com.nagico.bookstore.services.exception.account.SignUpError
+import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
 class SignUpViewModel : ViewModel() {
     private val mAccountService = AccountService.instance
     private lateinit var mBinding: FragmentSignUpBinding
+    @SuppressLint("StaticFieldLeak")
+    private lateinit var mActivity: FragmentActivity
 
     val username: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -27,8 +34,9 @@ class SignUpViewModel : ViewModel() {
         MutableLiveData<String>()
     }
 
-    fun init(binding: FragmentSignUpBinding) {
+    fun init(binding: FragmentSignUpBinding, activity: FragmentActivity) {
         mBinding = binding
+        mActivity = activity
 
         mBinding.etxSignUpUsername.onFocusChangeListener = clearErrorMsg
         mBinding.etxSignUpPassword.onFocusChangeListener = clearErrorMsg
@@ -38,7 +46,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     val navSignIn = View.OnClickListener {
-        val action = SignInFragmentDirections.actionGlobalSignInFragment()
+        val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
         it.findNavController().navigate(action)
     }
 
@@ -49,8 +57,10 @@ class SignUpViewModel : ViewModel() {
             if (password.value != passwordConfirm.value) throw SignUpError("password_confirm", "两次输入的密码不一致")
 
             val user = mAccountService.signUp(username.value!!, password.value!!)
+            ViewModelProvider(mActivity).get(BookstoreViewModel::class.java).user = user
             mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
-            Snackbar.make(it, "注册成功", Snackbar.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "注册成功", Toast.LENGTH_SHORT).show()
+            it.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToMainFragment())
         } catch (e: SignUpError) {
             when (e.code) {
                 "username" -> {

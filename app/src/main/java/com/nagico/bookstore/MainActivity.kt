@@ -1,13 +1,17 @@
 package com.nagico.bookstore
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.nagico.bookstore.dao.DBManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // hide action bar
+        supportActionBar?.hide()
 
+        setContentView(R.layout.activity_main)
+        ViewModelProvider(this).get(BookstoreViewModel::class.java).user = null
     }
 }

@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.nagico.bookstore.MainActivity
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentSignInBinding
 import com.nagico.bookstore.services.AccountService
+import com.nagico.bookstore.viewmodels.BookstoreViewModel
 import com.nagico.bookstore.viewmodels.welcome.SignInViewModel
 
 /**
@@ -23,9 +26,6 @@ class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
     private val mBinding get() = _binding!!
     private val mModelView: SignInViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +36,7 @@ class SignInFragment : Fragment() {
 
         mBinding.lifecycleOwner = this
         mBinding.signInViewModel = mModelView
-        mModelView.init(mBinding)
-
+        mModelView.init(mBinding, activity!!)
 
         return view
     }
