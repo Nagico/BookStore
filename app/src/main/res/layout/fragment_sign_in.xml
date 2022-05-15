@@ -2,7 +2,7 @@
 <layout xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-                name="signUpViewModel"
+                name="signInViewModel"
                 type="com.nagico.bookstore.viewmodels.welcome.SignInViewModel"
         />
     </data>
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="30"
-                    android:text="@={signUpViewModel.username}"
+                    android:text="@={signInViewModel.username}"
                     android:inputType="textShortMessage"
             />
         </com.google.android.material.textfield.TextInputLayout>
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="30"
-                    android:text="@={signUpViewModel.password}"
+                    android:text="@={signInViewModel.password}"
                     android:inputType="textPassword"
             />
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,10 +75,11 @@
                 android:backgroundTint="@color/theme_alert"
                 android:layout_width="122dp"
                 android:layout_height="53dp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/etx_sign_in_password_layout"
                 android:layout_marginTop="48dp"
-                android:onClick="@{signUpViewModel.signIn}"/>
+                android:onClick="@{signInViewModel.signIn}"/>
         <TextView
                 android:id="@+id/txt_hint_nav_sign_up"
                 android:text="@string/hint_nav_sign_up"
@@ -97,7 +98,7 @@
                 android:layout_marginBottom="16dp"
                 app:layout_constraintStart_toEndOf="@+id/txt_hint_nav_sign_up"
                 android:clickable="true"
-                android:onClick="@{signUpViewModel.txtNavSignUpOnClickListener}"/>
+                android:onClick="@{signInViewModel.txtNavSignUpOnClickListener}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

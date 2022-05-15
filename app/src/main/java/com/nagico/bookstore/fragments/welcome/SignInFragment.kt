@@ -35,7 +35,7 @@ class SignInFragment : Fragment() {
         val view = mBinding.root
 
         mBinding.lifecycleOwner = this
-        mBinding.signUpViewModel = mModelView
+        mBinding.signInViewModel = mModelView
         mModelView.init(mBinding)
 
 

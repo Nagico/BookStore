@@ -1,15 +1,12 @@
 package com.nagico.bookstore.viewmodels.welcome
 
-import android.content.Context
-import android.text.TextWatcher
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.Toast
-import androidx.databinding.BindingAdapter
-import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.nagico.bookstore.databinding.FragmentSignInBinding
 import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
 import com.nagico.bookstore.services.AccountService
@@ -42,16 +39,21 @@ class SignInViewModel : ViewModel(){
 
     val signIn = View.OnClickListener {
         try {
-            mAccountService.signIn(username.value?:"", password.value?:"")
+            if (username.value.isNullOrEmpty()) throw SignInError("username", "用户名不能为空")
+            if (password.value.isNullOrEmpty())  throw SignInError("password", "密码不能为空")
+
+            val user = mAccountService.signIn(username.value!!, password.value!!)
+            mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
+            Snackbar.make(it, "登录成功", Snackbar.LENGTH_SHORT).show()
         }
         catch (e: SignInError) {
-            when (e.message) {
+            when (e.code) {
                 "username" -> {
-                    mBinding.etxUsernameLayout.error = "用户名不存在"
+                    mBinding.etxUsernameLayout.error = e.message
                     mBinding.etxUsername.clearFocus()
                 }
                 "password" -> {
-                    mBinding.etxSignInPasswordLayout.error = "密码错误"
+                    mBinding.etxSignInPasswordLayout.error = e.message
                     mBinding.etxSignInPassword.clearFocus()
                 }
                 else -> {
