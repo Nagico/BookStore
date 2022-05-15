@@ -1,9 +1,11 @@
 package com.nagico.bookstore.services
 
+import android.content.Context
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.dao.UserDao
 import com.nagico.bookstore.models.User
 import com.nagico.bookstore.services.exception.account.SignInError
+import com.nagico.bookstore.services.exception.account.SignUpError
 import com.nagico.bookstore.utils.EncryptionUtil
 import java.util.*
 
@@ -17,22 +19,32 @@ class AccountService private constructor(){
         }
     }
 
-    fun SignIn(username: String, password: String): User {
-        val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique() ?: throw SignInError("用户名不存在")
-        if (user.password != EncryptionUtil.getEncryptedPassword(password, salt)) throw SignInError("密码错误")
+    fun signIn(username: String, password: String): User {
+        val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique() ?: throw SignInError("username")
+        if (user.password != EncryptionUtil.getEncryptedPassword(password, salt)) throw SignInError("password")
         return user
     }
 
-    fun SignUp(username: String, password: String): User {
+    fun signUp(username: String, password: String): User {
         val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique()
-        if (user != null) throw SignInError("用户名已存在")
+        if (user != null) throw SignUpError("username")
         val newUser = User(null, username, EncryptionUtil.getEncryptedPassword(password, salt), Date(), Date())
         dao.insert(newUser)
         return newUser
     }
 
-    fun CheckUsernameAvailability(username: String): Boolean {
+    fun checkUsernameAvailability(username: String): Boolean {
         val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique()
         return user == null
+    }
+
+    fun getDefaultUsername(context: Context): String {
+        val mSharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+        return mSharedPreferences.getString("default_username", "") ?: ""
+    }
+
+    fun setDefaultUsername(context: Context, username: String) {
+        val mSharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+        mSharedPreferences.edit().putString("default_username", username).apply()
     }
 }

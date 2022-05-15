@@ -1,6 +1,6 @@
 package com.nagico.bookstore.services.exception.account
 
-class SignInError : AccountException {
+open class SignInError : AccountException {
     constructor() : super() {}
     constructor(message: String) : super(message) {}
     constructor(message: String, cause: Throwable) : super(message, cause) {}
