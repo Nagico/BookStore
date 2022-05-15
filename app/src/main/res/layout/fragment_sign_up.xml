@@ -126,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:textColor="@color/theme_primary"
                 android:layout_height="wrap_content"
+                android:onClick="@{signUpViewModel.navSignIn}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintStart_toEndOf="@+id/txt_hint_nav_sign_in" android:clickable="true"/>

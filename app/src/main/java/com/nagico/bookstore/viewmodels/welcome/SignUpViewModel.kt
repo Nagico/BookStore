@@ -5,9 +5,11 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentSignUpBinding
+import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
 import com.nagico.bookstore.services.AccountService
 import com.nagico.bookstore.services.exception.account.SignUpError
 
@@ -33,6 +35,11 @@ class SignUpViewModel : ViewModel() {
         mBinding.etxSignUpPasswordConfirm.onFocusChangeListener = clearErrorMsg
 
         username.observe(mBinding.lifecycleOwner!!, checkUsername)
+    }
+
+    val navSignIn = View.OnClickListener {
+        val action = SignInFragmentDirections.actionGlobalSignInFragment()
+        it.findNavController().navigate(action)
     }
 
     val signUp = View.OnClickListener {
