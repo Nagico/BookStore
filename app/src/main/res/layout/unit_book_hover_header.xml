@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="m"
+                type="com.nagico.bookstore.viewmodels.main.BookInfoHoverHeaderModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.google.android.material.chip.Chip
+                android:id="@+id/chip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@{m.title}"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                android:backgroundTint="#67FCAA84"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

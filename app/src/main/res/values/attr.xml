@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="my_item_layout" format="reference" />
+
+    <declare-styleable name="BindingRecyclerView">
+        <attr name="my_item_layout" />
+    </declare-styleable>
+
+    <attr name="my_empty_layout" format="reference" />
+    <attr name="my_top_layout" format="reference" />
+    <attr name="my_top_enable" format="boolean" />
+    <declare-styleable name="BindingRefreshRecyclerView">
+        <attr name="my_item_layout" />
+        <attr name="my_empty_layout" />
+        <attr name="my_top_layout" />
+        <attr name="my_top_enable" />
+    </declare-styleable>
+
+</resources>

@@ -1,60 +1,95 @@
 package com.nagico.bookstore.fragments.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.drake.brv.layoutmanager.HoverGridLayoutManager
+import com.drake.brv.listener.OnHoverAttachListener
+import com.drake.brv.utils.bindingAdapter
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.setup
 import com.nagico.bookstore.R
+import com.nagico.bookstore.databinding.FragmentHomeBinding
+import com.nagico.bookstore.fragments.welcome.WelcomeFragmentDirections
+import com.nagico.bookstore.viewmodels.main.BookInfoHoverHeaderModel
+import com.nagico.bookstore.viewmodels.main.BookInfoModel
+import com.nagico.bookstore.viewmodels.main.HomeViewModel
+import io.alterac.blurkit.BlurLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
+
+
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private var _binding: FragmentHomeBinding? = null
+    private val mBinding get() = _binding!!
+    private val mViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = mBinding.root
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mBinding.homeRecyclerContainer.linear().setup {
+            addType<BookInfoModel>(R.layout.unit_book)
+            addType<BookInfoHoverHeaderModel>(R.layout.unit_book_hover_header)
+            models = mViewModel.mock(1,20)
+
+            onClick(R.id.book_info_layout) {
+                val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment()
+                findNavController().navigate(action)
+            }
+
+            onHoverAttachListener = object : OnHoverAttachListener {
+                // 黏住顶部的时候, v表示指定悬停的itemView对象
+                override fun attachHover(v: View) {
+                    ViewCompat.setElevation(v, 10F)
+                }
+
+                // 从顶部分离的时候
+                override fun detachHover(v: View) {
+                    ViewCompat.setElevation(v, 0F)
                 }
             }
+
+        }
+
+        val layoutManager = HoverGridLayoutManager(requireContext(), 2)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if(mBinding.homeRecyclerContainer.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
+            }
+        }
+        mBinding.homeRecyclerContainer.layoutManager = layoutManager
+
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

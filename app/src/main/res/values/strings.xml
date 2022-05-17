@@ -21,4 +21,5 @@
     <string name="science">科学</string>
     <string name="art">艺术</string>
     <string name="commerce">商业</string>
+    <string name="rmb">￥</string>
 </resources>
