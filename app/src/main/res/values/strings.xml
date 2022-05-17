@@ -23,4 +23,5 @@
     <string name="commerce">商业</string>
     <string name="rmb">￥</string>
     <string name="add_shopping_cart">加入购物车</string>
+    <string name="search">搜索</string>
 </resources>

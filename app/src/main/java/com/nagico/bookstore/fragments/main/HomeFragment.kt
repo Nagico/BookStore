@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.utils.bindingAdapter
@@ -60,6 +61,8 @@ class HomeFragment : Fragment() {
                 val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment()
                 findNavController().navigate(action)
             }
+
+            setAnimation(AnimationType.ALPHA)
 
             onHoverAttachListener = object : OnHoverAttachListener {
                 // 黏住顶部的时候, v表示指定悬停的itemView对象

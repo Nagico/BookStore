@@ -41,6 +41,7 @@
                     android:id="@+id/etx_sign_up_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:maxLength="30"
                     android:text="@={signUpViewModel.username}"
@@ -70,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="30"
+                    android:imeOptions="actionNext"
                     android:text="@={signUpViewModel.password}"
                     android:inputType="textPassword"
             />
@@ -96,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="30"
+                    android:imeOptions="actionDone"
                     android:text="@={signUpViewModel.passwordConfirm}"
                     android:inputType="textPassword"
             />
@@ -107,6 +110,7 @@
                 android:layout_width="122dp"
                 android:layout_height="53dp"
                 android:textSize="20sp"
+                app:shapeAppearance="@style/CircleStyle"
                 android:onClick="@{signUpViewModel.signUp}"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintEnd_toEndOf="parent"

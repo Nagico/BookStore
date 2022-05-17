@@ -9,12 +9,13 @@
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
+            android:backgroundTint="@color/white"
             android:layout_height="wrap_content" android:id="@+id/appBarLayout"
             >
         <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_scrollFlags="scroll"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingTop="8dp"
                 android:paddingStart="16dp"
@@ -47,49 +48,27 @@
                     app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toEndOf="parent"
             />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.tabs.TabLayout
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/MyDenseOutlined"
+                android:hint="@string/search"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:tabMode="scrollable"
-                app:tabContentStart="32dp">
-
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                app:startIconDrawable="@drawable/ic_search"
+                app:shapeAppearance="@style/CircleStyle"
+                android:imeOptions="actionSearch"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_text"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/all"
+                    android:singleLine="true"
             />
-
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/novel"
-            />
-
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/history"
-            />
-
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/science"
-            />
-
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/art"
-            />
-            <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/commerce"
-            />
-
-        </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
