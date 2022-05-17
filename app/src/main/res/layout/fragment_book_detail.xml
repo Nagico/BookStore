@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp" android:id="@+id/coordinatorLayout" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/containedButton">
+            app:layout_constraintBottom_toBottomOf="parent">
         <com.google.android.material.appbar.AppBarLayout
                 android:backgroundTint="@color/white"
                 android:layout_height="wrap_content"
@@ -54,6 +54,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/info"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <com.google.android.material.imageview.ShapeableImageView
@@ -142,27 +143,41 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:lineSpacingMultiplier="2"
-                        android:text="123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n"
+                        android:text="123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n123456789010\n555555555555"
                         app:layout_constraintTop_toBottomOf="@+id/txt_score"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                />
+                <ImageView
+                        android:id="@+id/space"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/content"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+        <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                app:realtimeBlurRadius="10dp"
+                android:layout_gravity="bottom"
+                app:layout_anchorGravity="bottom|center"
+                app:realtimeOverlayColor="#2DFFFFFF" />
+        <Button
+                android:id="@+id/btn_add_shopping_cart"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="18sp"
+                android:text="@string/add_shopping_cart"
+                app:shapeAppearance="@style/CircleStyle"
+                android:layout_gravity="bottom"
+                app:layout_anchorGravity="bottom|center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:textStyle="bold"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <Button
-            android:id="@+id/containedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:textSize="20sp"
-            android:text="@string/add_shopping_cart"
-            app:shapeAppearance="@style/CircleStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

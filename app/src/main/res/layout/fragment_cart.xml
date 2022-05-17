@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragments.main.CartFragment">
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.main.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="1234"/>
+            android:paddingBottom="100dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:clipToPadding="false" android:id="@+id/nestedScrollView">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n1234\n222222222222222234"/>
+    </androidx.core.widget.NestedScrollView>
+    <com.github.mmin18.widget.RealtimeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:realtimeBlurRadius="10dp"
+            android:layout_gravity="bottom"
+            app:layout_anchorGravity="bottom|center"
+            app:realtimeOverlayColor="#2DFFFFFF" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cart_bottom_container"
+            android:layout_width="match_parent"
+            app:layout_scrollFlags="scroll"
+            android:layout_height="64dp"
+            android:layout_gravity="bottom"
+            app:layout_anchorGravity="bottom|center"
+            app:layout_anchor="@+id/nestedScrollView">
+        <CheckBox
+                android:id="@+id/cb_cart_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="@string/select_all" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_total_price" android:textSize="16sp"/>
+        <TextView
+                android:id="@+id/txt_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="合计:￥12.34" app:layout_constraintStart_toEndOf="@+id/cb_cart_all"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="24dp" android:textSize="20sp" android:textColor="@color/black"/>
+        <Button
+                android:id="@+id/btn_settle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="16sp"
+                android:text="去结算"
+                app:shapeAppearance="@style/CircleStyle"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="16dp"/>
 
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

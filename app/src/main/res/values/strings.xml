@@ -24,4 +24,7 @@
     <string name="rmb">￥</string>
     <string name="add_shopping_cart">加入购物车</string>
     <string name="search">搜索</string>
+    <string name="select_all">全选</string>
+    <string name="total_price_hint">合计:￥</string>
+    <string name="settle">去结算</string>
 </resources>
