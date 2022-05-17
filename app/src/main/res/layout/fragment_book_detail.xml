@@ -90,14 +90,25 @@
                         app:layout_constraintStart_toEndOf="@+id/txt_title"
                         app:layout_constraintTop_toBottomOf="@+id/img_cover" android:layout_marginTop="24dp"/>
                 <TextView
+                        android:id="@+id/txt_author2"
+                        android:text="12346789345678"
+                        android:textSize="10sp"
+                        android:textAppearance="?attr/textAppearanceCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="16dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_title"/>
+                <TextView
                         android:id="@+id/txt_score"
                         android:text="12.3"
                         android:textSize="18sp"
                         android:textAppearance="?attr/textAppearanceCaption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="normal" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                        android:textStyle="normal"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_price" android:layout_marginStart="4dp"
                         app:layout_constraintStart_toEndOf="@+id/ic_star"/>
                 <TextView
                         android:id="@+id/txt_price_icon"
@@ -107,9 +118,8 @@
                         android:textAppearance="?attr/textAppearanceCaption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toStartOf="@+id/txt_price"
-                        android:layout_marginEnd="2dp"
-                        app:layout_constraintTop_toBottomOf="@+id/img_cover" android:layout_marginTop="24dp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/img_cover" android:layout_marginTop="24dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="84dp"/>
                 <TextView
                         android:id="@+id/txt_price"
                         android:text="12.34"
@@ -118,15 +128,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_cover" android:layout_marginTop="16dp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/img_cover" android:layout_marginTop="16dp"
+                        android:layout_marginStart="2dp" app:layout_constraintStart_toEndOf="@+id/txt_price_icon"/>
                 <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp" app:srcCompat="@drawable/ic_star" android:id="@+id/ic_star"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_title"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="16dp"/>
+                        android:layout_width="18dp"
+                        android:layout_height="18dp" app:srcCompat="@drawable/ic_star" android:id="@+id/ic_star"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_price_icon" android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="84dp"/>
                 <TextView
                         android:id="@+id/content"
                         android:layout_margin="16dp"

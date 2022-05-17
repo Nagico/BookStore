@@ -3,7 +3,7 @@
     <data>
         <variable
                 name="m"
-                type="com.nagico.bookstore.viewmodels.main.BookInfoHoverHeaderModel" />
+                type="com.nagico.bookstore.models.BookInfoHoverHeaderModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

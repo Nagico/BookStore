@@ -4,7 +4,7 @@
     <data>
         <variable
                 name="m"
-                type="com.nagico.bookstore.viewmodels.main.BookInfoModel" />
+                type="com.nagico.bookstore.models.BookInfoModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/book_info_layout"

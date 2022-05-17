@@ -1,4 +1,4 @@
-package com.nagico.bookstore.viewmodels.main
+package com.nagico.bookstore.models
 
 class BookInfoModel {
     var title: String = ""

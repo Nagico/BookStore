@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.drake.brv.annotaion.AnimationType
@@ -18,14 +17,9 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentHomeBinding
-import com.nagico.bookstore.fragments.welcome.WelcomeFragmentDirections
-import com.nagico.bookstore.viewmodels.main.BookInfoHoverHeaderModel
-import com.nagico.bookstore.viewmodels.main.BookInfoModel
+import com.nagico.bookstore.models.BookInfoHoverHeaderModel
+import com.nagico.bookstore.models.BookInfoModel
 import com.nagico.bookstore.viewmodels.main.HomeViewModel
-import io.alterac.blurkit.BlurLayout
-
-
-
 
 
 /**

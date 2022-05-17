@@ -2,6 +2,8 @@ package com.nagico.bookstore.viewmodels.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nagico.bookstore.models.BookInfoHoverHeaderModel
+import com.nagico.bookstore.models.BookInfoModel
 
 class HomeViewModel : ViewModel() {
     var mBookInfos = MutableLiveData<ArrayList<BookInfoModel>>()
