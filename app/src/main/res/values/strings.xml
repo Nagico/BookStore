@@ -22,4 +22,5 @@
     <string name="art">艺术</string>
     <string name="commerce">商业</string>
     <string name="rmb">￥</string>
+    <string name="add_shopping_cart">加入购物车</string>
 </resources>

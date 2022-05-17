@@ -31,10 +31,13 @@ class BookDetailFragment : Fragment() {
         return mBinding.root
     }
 
+    override fun onStop() {
+        super.onStop()
+        bar.visibility = View.VISIBLE
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        bar.visibility = View.VISIBLE
     }
 
 
