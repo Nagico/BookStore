@@ -15,6 +15,7 @@ import com.nagico.bookstore.databinding.FragmentSignUpBinding
 import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
 import com.nagico.bookstore.fragments.welcome.SignUpFragmentDirections
 import com.nagico.bookstore.services.AccountService
+import com.nagico.bookstore.services.BookStoreService
 import com.nagico.bookstore.services.exception.account.SignUpError
 import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
@@ -57,7 +58,7 @@ class SignUpViewModel : ViewModel() {
             if (password.value != passwordConfirm.value) throw SignUpError("password_confirm", "两次输入的密码不一致")
 
             val user = mAccountService.signUp(username.value!!, password.value!!)
-            ViewModelProvider(mActivity).get(BookstoreViewModel::class.java).user = user
+            BookStoreService.instance.setUser(mActivity, user)
             mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
             Toast.makeText(mActivity, "注册成功", Toast.LENGTH_SHORT).show()
             it.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToMainFragment())

@@ -40,6 +40,11 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = mBinding.root
+
+        mBinding.lifecycleOwner = this
+        mBinding.homeViewModel = mViewModel
+        mViewModel.init(mBinding, activity!!)
+
         return view
     }
 

@@ -1,5 +1,6 @@
 package com.nagico.bookstore.services
 
+import com.nagico.bookstore.dao.BookDao
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.models.Book
 
@@ -30,5 +31,12 @@ class BookService {
 
     fun deleteBook(book : Book) {
         bookDao.delete(book)
+    }
+
+    fun searchBooks(query : String) : List<Book> {
+        return bookDao.queryBuilder().whereOr(
+                BookDao.Properties.Title.like("%$query%"),
+                BookDao.Properties.Author.like("%$query%")
+        ).build().list()
     }
 }

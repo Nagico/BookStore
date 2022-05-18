@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.nagico.bookstore.databinding.FragmentSignInBinding
 import com.nagico.bookstore.fragments.welcome.SignInFragmentDirections
 import com.nagico.bookstore.services.AccountService
+import com.nagico.bookstore.services.BookStoreService
 import com.nagico.bookstore.services.exception.account.SignInError
 import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
@@ -23,10 +24,10 @@ class SignInViewModel : ViewModel(){
     @SuppressLint("StaticFieldLeak")
     private lateinit var mActivity: FragmentActivity
 
-    val username: MutableLiveData<String> by lazy {
+    val username by lazy {
         MutableLiveData<String>()
     }
-    val password: MutableLiveData<String> by lazy {
+    val password by lazy {
         MutableLiveData<String>()
     }
 
@@ -50,7 +51,7 @@ class SignInViewModel : ViewModel(){
             if (password.value.isNullOrEmpty())  throw SignInError("password", "密码不能为空")
 
             val user = mAccountService.signIn(username.value!!, password.value!!)
-            ViewModelProvider(mActivity).get(BookstoreViewModel::class.java).user = user
+            BookStoreService.instance.setUser(mActivity, user)
             mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
             Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show()
             it.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToMainFragment())

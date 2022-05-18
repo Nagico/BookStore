@@ -1,13 +1,34 @@
 package com.nagico.bookstore.viewmodels.main
 
+import android.annotation.SuppressLint
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nagico.bookstore.databinding.FragmentHomeBinding
+import com.nagico.bookstore.databinding.FragmentSignInBinding
 import com.nagico.bookstore.models.BookInfoHoverHeaderModel
 import com.nagico.bookstore.models.BookInfoModel
+import com.nagico.bookstore.models.User
+import com.nagico.bookstore.services.BookStoreService
 
 class HomeViewModel : ViewModel() {
-    var mBookInfos = MutableLiveData<ArrayList<BookInfoModel>>()
-    var mRes = MutableLiveData<ArrayList<BookInfoModel>>()
+    private lateinit var mBinding: FragmentHomeBinding
+    @SuppressLint("StaticFieldLeak")
+    private lateinit var mActivity: FragmentActivity
+
+    val bookInfos by lazy {
+        MutableLiveData<ArrayList<BookInfoModel>>()
+    }
+    val user by lazy {
+        MutableLiveData<User>()
+    }
+
+    fun init(binding: FragmentHomeBinding, activity: FragmentActivity){
+        mBinding = binding
+        mActivity = activity
+        user.value = BookStoreService.instance.getUser(mActivity)!!
+
+    }
 
     fun mock(pageIndex: Int, pageSize: Int): ArrayList<Any> {
         val data = ArrayList<Any>()
