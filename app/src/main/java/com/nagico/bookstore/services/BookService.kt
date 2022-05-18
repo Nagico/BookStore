@@ -51,7 +51,7 @@ class BookService private constructor(){
         bookInfo.price = String.format("%.2f",it.price)
         bookInfo.cover = it.cover
         bookInfo.score = String.format("%.1f",it.score)
-        bookInfo.color = it.color
+        bookInfo.color = "#1F" + it.color
         return bookInfo
     }
 

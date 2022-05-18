@@ -17,4 +17,15 @@ object ShapeableImageLoader{
             .load(url)
             .into(imageView)
     }
+
+    @BindingAdapter("color")
+    @JvmStatic
+    open fun setColor(
+        imageView: ShapeableImageView?,
+        color: String?
+    ) {
+        if(imageView==null)
+            return
+        imageView.setBackgroundColor(android.graphics.Color.parseColor(color!!))
+    }
 }
