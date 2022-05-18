@@ -25,5 +25,7 @@
             android:label="fragment_order"
             tools:layout="@layout/fragment_order"/>
     <fragment android:id="@+id/bookDetailFragment" android:name="com.nagico.bookstore.fragments.main.BookDetailFragment"
-              android:label="fragment_book_detail" tools:layout="@layout/fragment_book_detail"/>
+              android:label="fragment_book_detail" tools:layout="@layout/fragment_book_detail">
+        <argument android:name="bookId" app:argType="long"/>
+    </fragment>
 </navigation>

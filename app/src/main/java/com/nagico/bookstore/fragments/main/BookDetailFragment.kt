@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentBookDetailBinding
+import com.nagico.bookstore.viewmodels.main.BookDetailViewModel
 
 
 /**
@@ -18,7 +21,9 @@ import com.nagico.bookstore.databinding.FragmentBookDetailBinding
 class BookDetailFragment : Fragment() {
     private var _binding: FragmentBookDetailBinding? = null
     private val mBinding get() = _binding!!
+    private val mViewModel: BookDetailViewModel by viewModels()
     private lateinit var bar: BottomNavigationView
+    val args: BookDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +33,10 @@ class BookDetailFragment : Fragment() {
 
         bar = activity?.findViewById(R.id.bottom_navigation)!!
         bar.visibility = View.GONE
+
+        mBinding.lifecycleOwner = this
+        mBinding.bookDetailViewModel = mViewModel
+        mViewModel.init(mBinding, activity!!, args.bookId)
 
         return mBinding.root
     }

@@ -54,7 +54,7 @@ class HomeViewModel : ViewModel() {
             models = mBookService.getBookInfoListWithCategory()
 
             onClick(R.id.book_info_layout) {
-                val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment()
+                val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment((getModel() as BookInfoModel).id)
                 mBinding.root.findNavController().navigate(action)
             }
 

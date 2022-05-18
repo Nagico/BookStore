@@ -1,6 +1,7 @@
 package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.DBManager
+import com.nagico.bookstore.dao.OrderItemDao
 import com.nagico.bookstore.models.OrderItem
 import java.util.Date
 
@@ -20,14 +21,24 @@ class CartService private constructor(){
         return user.cart
     }
 
-    fun addToCart(userId: Long, bookId: Long, quantity: Int) {
+    fun addToCart(userId: Long, bookId: Long) {
         val user = userDao.load(userId)
-        val book = DBManager.instance.daoSession.bookDao.load(bookId)
-        val orderItem = OrderItem(
-            null, null, userId, bookId, quantity, 0.0, Date(), Date()
-        )
-        user.cart.add(orderItem)
-        userDao.update(user)
+        val orderItem = orderItemDao.queryBuilder()
+            .where(OrderItemDao.Properties.BookId.eq(bookId))
+            .where(OrderItemDao.Properties.CartId.eq(userId))
+            .unique()
+        if (orderItem != null) {
+            orderItem.quantity += 1
+            orderItem.updatedAt = Date()
+            orderItemDao.update(orderItem)
+        } else {
+            val newItem = OrderItem(
+                null, null, userId, bookId, 1, 0.0, Date(), Date()
+            )
+            orderItemDao.insert(newItem)
+            user.cart.add(newItem)
+            userDao.update(user)
+        }
     }
 
     fun removeFromCart(userId: Long, orderItemId: Long) {
