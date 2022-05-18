@@ -2,6 +2,7 @@ package com.nagico.bookstore.models;
 
 import org.greenrobot.greendao.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.DaoException;
 import com.nagico.bookstore.dao.DaoSession;
@@ -23,6 +24,17 @@ public class Order {
     @ToMany(referencedJoinProperty = "orderId")
     private List<OrderItem> orderItems;
 
+    private String paymentMethod;
+
+    @Property
+    private Date CreatedAt;
+
+    @Property
+    private Date PaidAt;
+
+    @Property
+    private Date UpdatedAt;
+
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -31,10 +43,15 @@ public class Order {
     @Generated(hash = 949219203)
     private transient OrderDao myDao;
 
-    @Generated(hash = 1889939673)
-    public Order(Long id, @NotNull Long userId) {
+    @Generated(hash = 2123151073)
+    public Order(Long id, @NotNull Long userId, String paymentMethod, Date CreatedAt, Date PaidAt,
+            Date UpdatedAt) {
         this.id = id;
         this.userId = userId;
+        this.paymentMethod = paymentMethod;
+        this.CreatedAt = CreatedAt;
+        this.PaidAt = PaidAt;
+        this.UpdatedAt = UpdatedAt;
     }
 
     @Generated(hash = 1105174599)
@@ -162,5 +179,37 @@ public class Order {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getOrderDao() : null;
+    }
+
+    public Date getCreatedAt() {
+        return this.CreatedAt;
+    }
+
+    public void setCreatedAt(Date CreatedAt) {
+        this.CreatedAt = CreatedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return this.UpdatedAt;
+    }
+
+    public void setUpdatedAt(Date UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
+    }
+
+    public Date getPaidAt() {
+        return this.PaidAt;
+    }
+
+    public void setPaidAt(Date PaidAt) {
+        this.PaidAt = PaidAt;
+    }
+
+    public String getPaymentMethod() {
+        return this.paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

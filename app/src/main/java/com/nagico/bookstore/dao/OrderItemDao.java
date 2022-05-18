@@ -33,11 +33,12 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property OrderId = new Property(1, Long.class, "orderId", false, "ORDER_ID");
-        public final static Property BookId = new Property(2, Long.class, "bookId", false, "BOOK_ID");
-        public final static Property Quantity = new Property(3, int.class, "quantity", false, "QUANTITY");
-        public final static Property Price = new Property(4, double.class, "price", false, "PRICE");
-        public final static Property CreatedAt = new Property(5, java.util.Date.class, "CreatedAt", false, "CREATED_AT");
-        public final static Property UpdatedAt = new Property(6, java.util.Date.class, "UpdatedAt", false, "UPDATED_AT");
+        public final static Property CartId = new Property(2, Long.class, "cartId", false, "CART_ID");
+        public final static Property BookId = new Property(3, Long.class, "bookId", false, "BOOK_ID");
+        public final static Property Quantity = new Property(4, int.class, "quantity", false, "QUANTITY");
+        public final static Property Price = new Property(5, double.class, "price", false, "PRICE");
+        public final static Property CreatedAt = new Property(6, java.util.Date.class, "CreatedAt", false, "CREATED_AT");
+        public final static Property UpdatedAt = new Property(7, java.util.Date.class, "UpdatedAt", false, "UPDATED_AT");
     }
 
     private DaoSession daoSession;
@@ -59,11 +60,12 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"ORDER_ITEM\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"ORDER_ID\" INTEGER," + // 1: orderId
-                "\"BOOK_ID\" INTEGER NOT NULL ," + // 2: bookId
-                "\"QUANTITY\" INTEGER NOT NULL ," + // 3: quantity
-                "\"PRICE\" REAL NOT NULL ," + // 4: price
-                "\"CREATED_AT\" INTEGER," + // 5: CreatedAt
-                "\"UPDATED_AT\" INTEGER);"); // 6: UpdatedAt
+                "\"CART_ID\" INTEGER," + // 2: cartId
+                "\"BOOK_ID\" INTEGER NOT NULL ," + // 3: bookId
+                "\"QUANTITY\" INTEGER NOT NULL ," + // 4: quantity
+                "\"PRICE\" REAL NOT NULL ," + // 5: price
+                "\"CREATED_AT\" INTEGER," + // 6: CreatedAt
+                "\"UPDATED_AT\" INTEGER);"); // 7: UpdatedAt
     }
 
     /** Drops the underlying database table. */
@@ -85,18 +87,23 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
         if (orderId != null) {
             stmt.bindLong(2, orderId);
         }
-        stmt.bindLong(3, entity.getBookId());
-        stmt.bindLong(4, entity.getQuantity());
-        stmt.bindDouble(5, entity.getPrice());
+ 
+        Long cartId = entity.getCartId();
+        if (cartId != null) {
+            stmt.bindLong(3, cartId);
+        }
+        stmt.bindLong(4, entity.getBookId());
+        stmt.bindLong(5, entity.getQuantity());
+        stmt.bindDouble(6, entity.getPrice());
  
         java.util.Date CreatedAt = entity.getCreatedAt();
         if (CreatedAt != null) {
-            stmt.bindLong(6, CreatedAt.getTime());
+            stmt.bindLong(7, CreatedAt.getTime());
         }
  
         java.util.Date UpdatedAt = entity.getUpdatedAt();
         if (UpdatedAt != null) {
-            stmt.bindLong(7, UpdatedAt.getTime());
+            stmt.bindLong(8, UpdatedAt.getTime());
         }
     }
 
@@ -113,18 +120,23 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
         if (orderId != null) {
             stmt.bindLong(2, orderId);
         }
-        stmt.bindLong(3, entity.getBookId());
-        stmt.bindLong(4, entity.getQuantity());
-        stmt.bindDouble(5, entity.getPrice());
+ 
+        Long cartId = entity.getCartId();
+        if (cartId != null) {
+            stmt.bindLong(3, cartId);
+        }
+        stmt.bindLong(4, entity.getBookId());
+        stmt.bindLong(5, entity.getQuantity());
+        stmt.bindDouble(6, entity.getPrice());
  
         java.util.Date CreatedAt = entity.getCreatedAt();
         if (CreatedAt != null) {
-            stmt.bindLong(6, CreatedAt.getTime());
+            stmt.bindLong(7, CreatedAt.getTime());
         }
  
         java.util.Date UpdatedAt = entity.getUpdatedAt();
         if (UpdatedAt != null) {
-            stmt.bindLong(7, UpdatedAt.getTime());
+            stmt.bindLong(8, UpdatedAt.getTime());
         }
     }
 
@@ -144,11 +156,12 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
         OrderItem entity = new OrderItem( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // orderId
-            cursor.getLong(offset + 2), // bookId
-            cursor.getInt(offset + 3), // quantity
-            cursor.getDouble(offset + 4), // price
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // CreatedAt
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)) // UpdatedAt
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // cartId
+            cursor.getLong(offset + 3), // bookId
+            cursor.getInt(offset + 4), // quantity
+            cursor.getDouble(offset + 5), // price
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // CreatedAt
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)) // UpdatedAt
         );
         return entity;
     }
@@ -157,11 +170,12 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
     public void readEntity(Cursor cursor, OrderItem entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setOrderId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setBookId(cursor.getLong(offset + 2));
-        entity.setQuantity(cursor.getInt(offset + 3));
-        entity.setPrice(cursor.getDouble(offset + 4));
-        entity.setCreatedAt(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setUpdatedAt(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setCartId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setBookId(cursor.getLong(offset + 3));
+        entity.setQuantity(cursor.getInt(offset + 4));
+        entity.setPrice(cursor.getDouble(offset + 5));
+        entity.setCreatedAt(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setUpdatedAt(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
      }
     
     @Override

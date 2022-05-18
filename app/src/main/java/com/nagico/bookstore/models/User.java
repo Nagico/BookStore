@@ -3,6 +3,7 @@ package com.nagico.bookstore.models;
 import org.greenrobot.greendao.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -14,6 +15,9 @@ public class User {
 
     @NotNull
     private String password;
+
+    @ToMany(referencedJoinProperty = "cardId")
+    private transient List<OrderItem> cart;
 
     @NotNull
     private Date createdAt;

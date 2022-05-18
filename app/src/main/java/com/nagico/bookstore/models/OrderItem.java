@@ -15,6 +15,8 @@ public class OrderItem {
 
     private Long orderId;
 
+    private Long cartId;
+
     @NotNull
     private Long bookId;
 
@@ -41,11 +43,12 @@ public class OrderItem {
     @Generated(hash = 681926587)
     private transient OrderItemDao myDao;
 
-    @Generated(hash = 1888284401)
-    public OrderItem(Long id, Long orderId, @NotNull Long bookId, int quantity,
+    @Generated(hash = 993641615)
+    public OrderItem(Long id, Long orderId, Long cartId, @NotNull Long bookId, int quantity,
             double price, Date CreatedAt, Date UpdatedAt) {
         this.id = id;
         this.orderId = orderId;
+        this.cartId = cartId;
         this.bookId = bookId;
         this.quantity = quantity;
         this.price = price;
@@ -190,5 +193,13 @@ public class OrderItem {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getOrderItemDao() : null;
+    }
+
+    public Long getCartId() {
+        return this.cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 }
