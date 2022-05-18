@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.nagico.bookstore.models.User
 import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
-class BookStoreService {
+class BookStoreService private constructor(){
     companion object {
         val instance : BookStoreService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             BookStoreService()

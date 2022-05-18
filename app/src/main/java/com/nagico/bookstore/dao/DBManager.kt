@@ -36,4 +36,9 @@ class DBManager private constructor() {
         return mHelper.writableDatabase
     }
 
+    fun destroyDB() {
+        DaoMaster.dropAllTables(mDaoMaster.database,true);
+        DaoMaster.createAllTables(mDaoMaster.database,true);
+    }
+
 }

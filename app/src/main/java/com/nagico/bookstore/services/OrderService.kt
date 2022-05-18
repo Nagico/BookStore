@@ -3,7 +3,7 @@ package com.nagico.bookstore.services
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.models.Order
 
-class OrderService {
+class OrderService private constructor(){
     private val orderDao = DBManager.instance.daoSession.orderDao
     private val orderItemDao = DBManager.instance.daoSession.orderItemDao
 

@@ -51,38 +51,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mBinding.homeRecyclerContainer.linear().setup {
-            addType<BookInfoModel>(R.layout.unit_book)
-            addType<BookInfoHoverHeaderModel>(R.layout.unit_book_hover_header)
-            models = mViewModel.mock(1,20)
-
-            onClick(R.id.book_info_layout) {
-                val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment()
-                findNavController().navigate(action)
-            }
-
-            onHoverAttachListener = object : OnHoverAttachListener {
-                // 黏住顶部的时候, v表示指定悬停的itemView对象
-                override fun attachHover(v: View) {
-                    ViewCompat.setElevation(v, 10F)
-                }
-
-                // 从顶部分离的时候
-                override fun detachHover(v: View) {
-                    ViewCompat.setElevation(v, 0F)
-                }
-            }
-
-        }
-
-        val layoutManager = HoverGridLayoutManager(requireContext(), 2)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if(mBinding.homeRecyclerContainer.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
-            }
-        }
-        mBinding.homeRecyclerContainer.layoutManager = layoutManager
-
     }
     override fun onDestroyView() {
         super.onDestroyView()

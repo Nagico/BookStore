@@ -33,12 +33,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Author = new Property(2, String.class, "author", false, "AUTHOR");
         public final static Property Isbn = new Property(3, String.class, "isbn", false, "ISBN");
-        public final static Property Cover = new Property(4, byte[].class, "cover", false, "COVER");
-        public final static Property Description = new Property(5, String.class, "description", false, "DESCRIPTION");
-        public final static Property CategoryId = new Property(6, Long.class, "categoryId", false, "CATEGORY_ID");
-        public final static Property Price = new Property(7, double.class, "price", false, "PRICE");
-        public final static Property CreatedAt = new Property(8, java.util.Date.class, "createdAt", false, "CREATED_AT");
-        public final static Property UpdatedAt = new Property(9, java.util.Date.class, "updatedAt", false, "UPDATED_AT");
+        public final static Property Cover = new Property(4, String.class, "cover", false, "COVER");
+        public final static Property Color = new Property(5, String.class, "color", false, "COLOR");
+        public final static Property Score = new Property(6, double.class, "score", false, "SCORE");
+        public final static Property Description = new Property(7, String.class, "description", false, "DESCRIPTION");
+        public final static Property CategoryId = new Property(8, Long.class, "categoryId", false, "CATEGORY_ID");
+        public final static Property Price = new Property(9, double.class, "price", false, "PRICE");
+        public final static Property CreatedAt = new Property(10, java.util.Date.class, "createdAt", false, "CREATED_AT");
+        public final static Property UpdatedAt = new Property(11, java.util.Date.class, "updatedAt", false, "UPDATED_AT");
     }
 
     private DaoSession daoSession;
@@ -61,12 +63,14 @@ public class BookDao extends AbstractDao<Book, Long> {
                 "\"TITLE\" TEXT NOT NULL ," + // 1: title
                 "\"AUTHOR\" TEXT NOT NULL ," + // 2: author
                 "\"ISBN\" TEXT NOT NULL ," + // 3: isbn
-                "\"COVER\" BLOB NOT NULL ," + // 4: cover
-                "\"DESCRIPTION\" TEXT NOT NULL ," + // 5: description
-                "\"CATEGORY_ID\" INTEGER NOT NULL ," + // 6: categoryId
-                "\"PRICE\" REAL NOT NULL ," + // 7: price
-                "\"CREATED_AT\" INTEGER NOT NULL ," + // 8: createdAt
-                "\"UPDATED_AT\" INTEGER NOT NULL );"); // 9: updatedAt
+                "\"COVER\" TEXT NOT NULL ," + // 4: cover
+                "\"COLOR\" TEXT NOT NULL ," + // 5: color
+                "\"SCORE\" REAL NOT NULL ," + // 6: score
+                "\"DESCRIPTION\" TEXT NOT NULL ," + // 7: description
+                "\"CATEGORY_ID\" INTEGER NOT NULL ," + // 8: categoryId
+                "\"PRICE\" REAL NOT NULL ," + // 9: price
+                "\"CREATED_AT\" INTEGER NOT NULL ," + // 10: createdAt
+                "\"UPDATED_AT\" INTEGER NOT NULL );"); // 11: updatedAt
     }
 
     /** Drops the underlying database table. */
@@ -86,12 +90,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         stmt.bindString(2, entity.getTitle());
         stmt.bindString(3, entity.getAuthor());
         stmt.bindString(4, entity.getIsbn());
-        stmt.bindBlob(5, entity.getCover());
-        stmt.bindString(6, entity.getDescription());
-        stmt.bindLong(7, entity.getCategoryId());
-        stmt.bindDouble(8, entity.getPrice());
-        stmt.bindLong(9, entity.getCreatedAt().getTime());
-        stmt.bindLong(10, entity.getUpdatedAt().getTime());
+        stmt.bindString(5, entity.getCover());
+        stmt.bindString(6, entity.getColor());
+        stmt.bindDouble(7, entity.getScore());
+        stmt.bindString(8, entity.getDescription());
+        stmt.bindLong(9, entity.getCategoryId());
+        stmt.bindDouble(10, entity.getPrice());
+        stmt.bindLong(11, entity.getCreatedAt().getTime());
+        stmt.bindLong(12, entity.getUpdatedAt().getTime());
     }
 
     @Override
@@ -105,12 +111,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         stmt.bindString(2, entity.getTitle());
         stmt.bindString(3, entity.getAuthor());
         stmt.bindString(4, entity.getIsbn());
-        stmt.bindBlob(5, entity.getCover());
-        stmt.bindString(6, entity.getDescription());
-        stmt.bindLong(7, entity.getCategoryId());
-        stmt.bindDouble(8, entity.getPrice());
-        stmt.bindLong(9, entity.getCreatedAt().getTime());
-        stmt.bindLong(10, entity.getUpdatedAt().getTime());
+        stmt.bindString(5, entity.getCover());
+        stmt.bindString(6, entity.getColor());
+        stmt.bindDouble(7, entity.getScore());
+        stmt.bindString(8, entity.getDescription());
+        stmt.bindLong(9, entity.getCategoryId());
+        stmt.bindDouble(10, entity.getPrice());
+        stmt.bindLong(11, entity.getCreatedAt().getTime());
+        stmt.bindLong(12, entity.getUpdatedAt().getTime());
     }
 
     @Override
@@ -131,12 +139,14 @@ public class BookDao extends AbstractDao<Book, Long> {
             cursor.getString(offset + 1), // title
             cursor.getString(offset + 2), // author
             cursor.getString(offset + 3), // isbn
-            cursor.getBlob(offset + 4), // cover
-            cursor.getString(offset + 5), // description
-            cursor.getLong(offset + 6), // categoryId
-            cursor.getDouble(offset + 7), // price
-            new java.util.Date(cursor.getLong(offset + 8)), // createdAt
-            new java.util.Date(cursor.getLong(offset + 9)) // updatedAt
+            cursor.getString(offset + 4), // cover
+            cursor.getString(offset + 5), // color
+            cursor.getDouble(offset + 6), // score
+            cursor.getString(offset + 7), // description
+            cursor.getLong(offset + 8), // categoryId
+            cursor.getDouble(offset + 9), // price
+            new java.util.Date(cursor.getLong(offset + 10)), // createdAt
+            new java.util.Date(cursor.getLong(offset + 11)) // updatedAt
         );
         return entity;
     }
@@ -147,12 +157,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         entity.setTitle(cursor.getString(offset + 1));
         entity.setAuthor(cursor.getString(offset + 2));
         entity.setIsbn(cursor.getString(offset + 3));
-        entity.setCover(cursor.getBlob(offset + 4));
-        entity.setDescription(cursor.getString(offset + 5));
-        entity.setCategoryId(cursor.getLong(offset + 6));
-        entity.setPrice(cursor.getDouble(offset + 7));
-        entity.setCreatedAt(new java.util.Date(cursor.getLong(offset + 8)));
-        entity.setUpdatedAt(new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setCover(cursor.getString(offset + 4));
+        entity.setColor(cursor.getString(offset + 5));
+        entity.setScore(cursor.getDouble(offset + 6));
+        entity.setDescription(cursor.getString(offset + 7));
+        entity.setCategoryId(cursor.getLong(offset + 8));
+        entity.setPrice(cursor.getDouble(offset + 9));
+        entity.setCreatedAt(new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setUpdatedAt(new java.util.Date(cursor.getLong(offset + 11)));
      }
     
     @Override

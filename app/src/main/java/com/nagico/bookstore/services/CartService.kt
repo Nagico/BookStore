@@ -4,10 +4,16 @@ import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.models.OrderItem
 import java.util.Date
 
-class CartService {
+class CartService private constructor(){
     private val userDao = DBManager.instance.daoSession.userDao
     private val orderDao = DBManager.instance.daoSession.orderDao
     private val orderItemDao = DBManager.instance.daoSession.orderItemDao
+
+    companion object {
+        val instance : CartService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            CartService()
+        }
+    }
 
     fun getCart(userId: Long): List<OrderItem> {
         val user = userDao.load(userId)

@@ -23,7 +23,13 @@ public class Book {
     private String isbn;
 
     @NotNull
-    private byte[] cover;
+    private String cover;
+
+    @NotNull
+    private String color;
+
+    @NotNull
+    private double score;
 
     @NotNull
     private String description;
@@ -51,16 +57,18 @@ public class Book {
     @Generated(hash = 1097957864)
     private transient BookDao myDao;
 
-    @Generated(hash = 1348458510)
+    @Generated(hash = 417533886)
     public Book(Long id, @NotNull String title, @NotNull String author,
-            @NotNull String isbn, @NotNull byte[] cover,
-            @NotNull String description, @NotNull Long categoryId, double price,
-            @NotNull Date createdAt, @NotNull Date updatedAt) {
+            @NotNull String isbn, @NotNull String cover, @NotNull String color,
+            double score, @NotNull String description, @NotNull Long categoryId,
+            double price, @NotNull Date createdAt, @NotNull Date updatedAt) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.cover = cover;
+        this.color = color;
+        this.score = score;
         this.description = description;
         this.categoryId = categoryId;
         this.price = price;
@@ -104,12 +112,28 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public byte[] getCover() {
+    public String getCover() {
         return this.cover;
     }
 
-    public void setCover(byte[] cover) {
+    public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getScore() {
+        return this.score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public String getDescription() {

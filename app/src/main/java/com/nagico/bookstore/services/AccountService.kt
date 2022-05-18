@@ -19,6 +19,10 @@ class AccountService private constructor(){
         }
     }
 
+    fun getList(): List<User> {
+        return dao.loadAll()
+    }
+
     fun signIn(username: String, password: String): User {
         val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique() ?: throw SignInError("username", "用户名不存在")
         if (user.password != EncryptionUtil.getEncryptedPassword(password, salt)) throw SignInError("password", "密码错误")

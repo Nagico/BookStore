@@ -53,5 +53,15 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="128dp"
             android:backgroundTint="@color/theme_alert"/>
 
+    <TextView
+            android:id="@+id/txt_init_db"
+            android:text="@string/init_db"
+            android:layout_width="wrap_content"
+            android:textColor="@color/theme_primary"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:clickable="true" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="16dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
