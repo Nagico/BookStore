@@ -7,7 +7,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragments.main.BookDetailFragment">
     <com.google.android.material.appbar.AppBarLayout
-            android:backgroundTint="@color/white"
+            android:background="@color/theme_bg_white"
             android:layout_height="wrap_content"
             android:layout_width="match_parent" android:id="@+id/appBarLayout2">
         <androidx.constraintlayout.widget.ConstraintLayout
