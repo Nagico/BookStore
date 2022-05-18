@@ -30,6 +30,7 @@ class AccountService private constructor(){
         val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique()
         if (user != null) throw SignUpError("username", "用户名已存在")
         val newUser = User(null, username, EncryptionUtil.getEncryptedPassword(password, salt), Date(), Date())
+
         dao.insert(newUser)
         return newUser
     }
@@ -48,4 +49,5 @@ class AccountService private constructor(){
         val mSharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
         mSharedPreferences.edit().putString("default_username", username).apply()
     }
+
 }

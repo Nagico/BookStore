@@ -44,6 +44,7 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
     private DaoSession daoSession;
 
     private Query<OrderItem> order_OrderItemsQuery;
+    private Query<OrderItem> user_CartQuery;
 
     public OrderItemDao(DaoConfig config) {
         super(config);
@@ -214,6 +215,20 @@ public class OrderItemDao extends AbstractDao<OrderItem, Long> {
         }
         Query<OrderItem> query = order_OrderItemsQuery.forCurrentThread();
         query.setParameter(0, orderId);
+        return query.list();
+    }
+
+    /** Internal query to resolve the "cart" to-many relationship of User. */
+    public List<OrderItem> _queryUser_Cart(Long cartId) {
+        synchronized (this) {
+            if (user_CartQuery == null) {
+                QueryBuilder<OrderItem> queryBuilder = queryBuilder();
+                queryBuilder.where(Properties.CartId.eq(null));
+                user_CartQuery = queryBuilder.build();
+            }
+        }
+        Query<OrderItem> query = user_CartQuery.forCurrentThread();
+        query.setParameter(0, cartId);
         return query.list();
     }
 

@@ -8,6 +8,7 @@
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/edittext_shape.xml" value="0.3151041666666667" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_add.xml" value="0.3848958333333333" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_back.xml" value="0.2375" />
+        <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_book_color.xml" value="0.2" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_collect.xml" value="0.2375" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_del.xml" value="0.3848958333333333" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/drawable/ic_home.xml" value="0.37592592592592594" />
@@ -46,6 +47,8 @@
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/menu/menu_home_app_bar.xml" value="0.264" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/menu/menu_home_buttom.xml" value="0.152" />
         <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/menu/menu_main.xml" value="0.2453125" />
+        <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.38958333333333334" />
+        <entry key="..\:/Work/Subjects/Android/final/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.38958333333333334" />
       </map>
     </option>
   </component>
