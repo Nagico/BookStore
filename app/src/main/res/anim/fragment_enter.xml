@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 从父布局最右边进入直到完全充满父布局，动画时间1秒 -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:duration="500"
+     android:fillAfter="true"
+>
+<translate
+        android:fromXDelta="100%p"
+        android:toXDelta="0" />
+</set>

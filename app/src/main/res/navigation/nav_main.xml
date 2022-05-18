@@ -10,8 +10,9 @@
             android:label="fragment_home"
             tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_page_home_to_bookDetailFragment" app:destination="@id/bookDetailFragment"
-                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+                app:enterAnim="@anim/fragment_enter"
+                app:exitAnim="@anim/fragment_exit" app:popEnterAnim="@anim/fragment_pop_enter"
+                app:popExitAnim="@anim/fragment_pop_exit"/>
     </fragment>
     <fragment
             android:id="@+id/page_cart"

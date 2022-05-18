@@ -56,8 +56,6 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(action)
             }
 
-            setAnimation(AnimationType.ALPHA)
-
             onHoverAttachListener = object : OnHoverAttachListener {
                 // 黏住顶部的时候, v表示指定悬停的itemView对象
                 override fun attachHover(v: View) {

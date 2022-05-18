@@ -1,6 +1,7 @@
 package com.nagico.bookstore.fragments.main
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,18 +26,19 @@ class BookDetailFragment : Fragment() {
     ): View {
         _binding = FragmentBookDetailBinding.inflate(inflater, container, false)
 
-        bar = activity?.findViewById(R.id.bottom_navigation)!!
-        bar.visibility = View.GONE
+        //bar = activity?.findViewById(R.id.bottom_navigation)!!
+        //bar.visibility = View.GONE
 
         return mBinding.root
     }
 
     override fun onStop() {
         super.onStop()
-        bar.visibility = View.VISIBLE
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        //bar.visibility = View.VISIBLE
         _binding = null
     }
 
