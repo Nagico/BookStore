@@ -12,21 +12,61 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
     </style>
+    <style name="LeftRoundedCornerStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">50%</item>
+        <item name="cornerSizeBottomLeft">50%</item>
+    </style>
+    <style name="RightRoundedCornerStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">50%</item>
+        <item name="cornerSizeBottomRight">50%</item>
+    </style>
+    <style name="SimpleOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">#E0E0E0</item>
+        <item name="boxStrokeWidth">@dimen/mtrl_btn_stroke_size</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
+    </style>
     <style name="CircleStyle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-    <style name="MyDenseOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="materialThemeOverlay">@style/MyThemeOverlayOutlinedDense</item>
+    <style name="SearchBoxDenseOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="materialThemeOverlay">@style/SearchBoxOverlayOutlinedDense</item>
     </style>
 
-    <style name="MyThemeOverlayOutlinedDense">
-        <item name="editTextStyle">@style/MyTextInputEditText_outlinedBox_dense_h
+    <style name="SearchBoxOverlayOutlinedDense">
+        <item name="editTextStyle">@style/SearchBoxTextInputEditText_outlinedBox_dense_h
         </item>
     </style>
 
-    <style name="MyTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+    <style name="QualityTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="QualityDenseOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="materialThemeOverlay">@style/QualityOverlayOutlinedDense</item>
+    </style>
+
+    <style name="QualityOverlayOutlinedDense">
+        <item name="editTextStyle">@style/QualityTextInputEditText_outlinedBox_dense_h
+        </item>
+    </style>
+
+    <style name="SearchBoxTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:minHeight">24dp</item>
     </style>
 </resources>

@@ -17,14 +17,15 @@
     <string name="sentence">Knowledge is the eye of the mind</string>
     <string name="all">全部</string>
     <string name="novel">小说</string>
-    <string name="history">历史</string>
-    <string name="science">科学</string>
-    <string name="art">艺术</string>
-    <string name="commerce">商业</string>
     <string name="rmb">￥</string>
     <string name="add_shopping_cart">加入购物车</string>
     <string name="search">搜索</string>
     <string name="select_all">全选</string>
     <string name="total_price_hint">合计:￥</string>
     <string name="settle">去结算</string>
+    <string name="unpaid">待付款</string>
+    <string name="unreceived">待收货</string>
+    <string name="finished">已完成</string>
+    <string name="canceled">已取消</string>
+    <string name="more">更多</string>
 </resources>

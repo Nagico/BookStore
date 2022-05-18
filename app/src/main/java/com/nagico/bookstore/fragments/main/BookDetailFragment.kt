@@ -26,8 +26,8 @@ class BookDetailFragment : Fragment() {
     ): View {
         _binding = FragmentBookDetailBinding.inflate(inflater, container, false)
 
-        //bar = activity?.findViewById(R.id.bottom_navigation)!!
-        //bar.visibility = View.GONE
+        bar = activity?.findViewById(R.id.bottom_navigation)!!
+        bar.visibility = View.GONE
 
         return mBinding.root
     }
@@ -37,8 +37,8 @@ class BookDetailFragment : Fragment() {
 
     }
     override fun onDestroyView() {
+        bar.visibility = View.VISIBLE
         super.onDestroyView()
-        //bar.visibility = View.VISIBLE
         _binding = null
     }
 

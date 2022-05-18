@@ -23,7 +23,7 @@
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintVertical_bias="1.0"/>
         <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/img_cover"
+                android:id="@+id/img_cover1"
                 load="@{m.cover}"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -41,7 +41,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/img_cover" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_cover1" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="12dp" android:layout_marginStart="16dp" android:textStyle="bold"/>
         <TextView
                 android:id="@+id/txt_author"

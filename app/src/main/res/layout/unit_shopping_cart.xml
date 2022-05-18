@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        app:shapeAppearance="@style/roundedCornerStyle2"
+        android:layout_height="160dp" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <CheckBox
+            android:id="@+id/cb_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_cover1"
+            android:src="@drawable/pic_cover"
+            android:layout_marginBottom="16dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            app:shapeAppearance="@style/roundedCornerStyle2"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="16dp" app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cb_book"/>
+
+    <TextView
+            android:id="@+id/txt_title"
+            android:text="22345678"
+            android:textSize="24sp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp" android:layout_marginStart="24dp"
+            app:layout_constraintStart_toEndOf="@+id/img_cover1"/>
+    <TextView
+            android:id="@+id/txt_price"
+            android:text="￥21.34"
+            android:textSize="20sp"
+            android:textColor="@color/theme_primary"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" android:layout_marginStart="24dp"
+            app:layout_constraintStart_toEndOf="@+id/img_cover1"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/txt_title"/>
+    <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:icon="@drawable/ic_clear"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+            app:shapeAppearance="@style/CircleStyle"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toEndOf="@+id/img_cover1" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"/>
+    <Button
+            android:id="@+id/btn_del"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            app:icon="@drawable/ic_del"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+            app:shapeAppearance="@style/LeftRoundedCornerStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" app:layout_constraintEnd_toStartOf="@+id/outlinedTextField"
+    />
+    <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            app:icon="@drawable/ic_add"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+            app:shapeAppearance="@style/RightRoundedCornerStyle"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"/>
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField"
+            android:layout_width="40dp"
+            android:layout_height="28dp"
+            app:hintEnabled="false"
+            app:shapeAppearance="@style/SimpleOutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/QualityDenseOutlined"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:textAlignment="center"
+                android:text="12"
+                android:textSize="12sp"
+                android:singleLine="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

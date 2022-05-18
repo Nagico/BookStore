@@ -17,4 +17,6 @@
     <color name="theme_secondary">#d21ee9</color>
     <color name="theme_secondary_variant">#9315a3</color>
     <color name="theme_alert">#e9391e</color>
+    <color name="theme_bg">#F2F2F2</color>
+    <color name="theme_bg_white">#FAF8F9</color>
 </resources>
