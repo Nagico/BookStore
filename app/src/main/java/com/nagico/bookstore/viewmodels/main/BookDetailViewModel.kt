@@ -1,6 +1,7 @@
 package com.nagico.bookstore.viewmodels.main
 
 import android.annotation.SuppressLint
+import android.view.HapticFeedbackConstants
 import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -37,10 +38,12 @@ class BookDetailViewModel : ViewModel() {
 
     fun addCart() = OnClickListener {
         mCartService.addToCart(mBookStoreService.getUser(mActivity)!!.id, book.value!!.id)
+        it.performHapticFeedback(HapticFeedbackConstants.CONFIRM, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
         Toast.makeText(mActivity, "成功加入购物车", Toast.LENGTH_SHORT).show()
     }
 
     fun back() = OnClickListener {
+        it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
         mBinding.root.findNavController().navigateUp()
     }
 }

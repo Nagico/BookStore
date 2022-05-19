@@ -2,6 +2,7 @@ package com.nagico.bookstore.viewmodels.welcome
 
 import android.annotation.SuppressLint
 import android.view.Gravity
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.Toast
@@ -41,6 +42,7 @@ class SignInViewModel : ViewModel(){
     }
 
     val txtNavSignUpOnClickListener = View.OnClickListener {
+        it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
         val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
         it.findNavController().navigate(action)
     }
@@ -53,10 +55,12 @@ class SignInViewModel : ViewModel(){
             val user = mAccountService.signIn(username.value!!, password.value!!)
             BookStoreService.instance.setUser(mActivity, user)
             mAccountService.setDefaultUsername(mBinding.root.context, username.value!!)
+            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
             Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show()
             it.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToMainFragment())
         }
         catch (e: SignInError) {
+            it.performHapticFeedback(HapticFeedbackConstants.REJECT, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
             when (e.code) {
                 "username" -> {
                     mBinding.etxUsernameLayout.error = e.message

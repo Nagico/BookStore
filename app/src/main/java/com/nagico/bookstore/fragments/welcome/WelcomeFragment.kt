@@ -1,6 +1,7 @@
 package com.nagico.bookstore.fragments.welcome
 
 import android.os.Bundle
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,23 +28,27 @@ class WelcomeFragment : Fragment() {
         val view = mBinding.root
 
         mBinding.btnNavSignIn.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignInFragment()
             it.findNavController().navigate(action)
         }
 
         mBinding.btnNavSignUp.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignUpFragment()
             it.findNavController().navigate(action)
         }
 
         mBinding.txtInitDb.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
             MaterialAlertDialogBuilder(context!!)
                 .setTitle("初始化数据库")
                 .setMessage("初始化后，数据库将被清空，请谨慎操作！\n初始用户名: co\n初始密码: 123")
                 .setNegativeButton("取消") { dialog, which ->
-
+                    it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
                 }
                 .setPositiveButton("确认") { dialog, which ->
+                    it.performHapticFeedback(HapticFeedbackConstants.CONFIRM, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
                     DataUtil.init()
                     Toast.makeText(context, "初始化成功", Toast.LENGTH_SHORT).show()
                 }

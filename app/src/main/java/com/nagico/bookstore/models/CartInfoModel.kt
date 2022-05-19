@@ -1,9 +1,16 @@
 package com.nagico.bookstore.models
 
-class CartInfoModel {
-    val title = ""
-    val price = 0.0
-    val quantity = 0
-    val cover = ""
-    val checked = false
+import android.view.View
+
+class CartInfoModel(
+    var id: Long,
+    var bookId: Long,
+    var title: String,
+    var price: Double,
+    var quantity: Int,
+    var cover: String,
+    var checked: Boolean
+) {
+    val priceDisplay: String
+        get() = "￥${String.format("%.2f", price)}"
 }

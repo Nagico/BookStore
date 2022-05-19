@@ -1,6 +1,7 @@
 package com.nagico.bookstore.viewmodels.main
 
 import android.annotation.SuppressLint
+import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
@@ -30,9 +31,6 @@ class HomeViewModel : ViewModel() {
     private lateinit var mActivity: FragmentActivity
     private lateinit var mBookService: BookService
 
-    val bookInfos by lazy {
-        MutableLiveData<ArrayList<BookInfoModel>>()
-    }
     val user by lazy {
         MutableLiveData<User>()
     }
@@ -54,6 +52,7 @@ class HomeViewModel : ViewModel() {
             models = mBookService.getBookInfoListWithCategory()
 
             onClick(R.id.book_info_layout) {
+                mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
                 val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment((getModel() as BookInfoModel).id)
                 mBinding.root.findNavController().navigate(action)
             }
@@ -94,6 +93,7 @@ class HomeViewModel : ViewModel() {
     }
 
     val toTop = View.OnClickListener {
+        it.performHapticFeedback(HapticFeedbackConstants.CONFIRM, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
         mBinding.homeRecyclerContainer.smoothScrollToPosition(0)
     }
 

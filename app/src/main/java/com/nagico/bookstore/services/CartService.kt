@@ -2,6 +2,7 @@ package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.dao.OrderItemDao
+import com.nagico.bookstore.models.CartInfoModel
 import com.nagico.bookstore.models.OrderItem
 import java.util.Date
 
@@ -16,9 +17,28 @@ class CartService private constructor(){
         }
     }
 
-    fun getCart(userId: Long): List<OrderItem> {
-        val user = userDao.load(userId)
-        return user.cart
+    private fun convertOrderItemToCartInfoModel(orderItem: OrderItem): CartInfoModel {
+        val book = orderItem.book
+        return CartInfoModel(
+            id = orderItem.id,
+            bookId = book.id,
+            title = book.title,
+            price = book.price,
+            quantity = orderItem.quantity,
+            cover = book.cover,
+            checked = false
+        )
+    }
+
+    fun getCartList(userId: Long): List<CartInfoModel> {
+        val cart = orderItemDao.queryBuilder()
+            .where(OrderItemDao.Properties.CartId.eq(userId))
+            .list()
+        val res = mutableListOf<CartInfoModel>()
+        cart.forEach {
+            res.add(convertOrderItemToCartInfoModel(it))
+        }
+        return res
     }
 
     fun addToCart(userId: Long, bookId: Long) {
@@ -44,6 +64,7 @@ class CartService private constructor(){
     fun removeFromCart(userId: Long, orderItemId: Long) {
         val user = userDao.load(userId)
         val orderItem = orderItemDao.load(orderItemId)
+        orderItemDao.delete(orderItem)
         user.cart.remove(orderItem)
         userDao.update(user)
     }

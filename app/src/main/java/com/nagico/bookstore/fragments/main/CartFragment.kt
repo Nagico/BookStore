@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentCartBinding
 import com.nagico.bookstore.databinding.FragmentHomeBinding
+import com.nagico.bookstore.viewmodels.main.CartViewModel
 
 
 /**
@@ -17,6 +19,7 @@ import com.nagico.bookstore.databinding.FragmentHomeBinding
 class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
     private val mBinding get() = _binding!!
+    private val mViewModel: CartViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,6 +29,10 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
+
+        mBinding.lifecycleOwner = this
+        mBinding.cartViewModel = mViewModel
+        mViewModel.init(mBinding, activity!!)
 
         return mBinding.root
     }
