@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.nagico.bookstore.databinding.FragmentBookDetailBinding
 import com.nagico.bookstore.models.Book
 import com.nagico.bookstore.services.BookService
@@ -37,5 +38,9 @@ class BookDetailViewModel : ViewModel() {
     fun addCart() = OnClickListener {
         mCartService.addToCart(mBookStoreService.getUser(mActivity)!!.id, book.value!!.id)
         Toast.makeText(mActivity, "成功加入购物车", Toast.LENGTH_SHORT).show()
+    }
+
+    fun back() = OnClickListener {
+        mBinding.root.findNavController().navigateUp()
     }
 }

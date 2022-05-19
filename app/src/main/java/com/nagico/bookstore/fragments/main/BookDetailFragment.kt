@@ -51,5 +51,4 @@ class BookDetailFragment : Fragment() {
         _binding = null
     }
 
-
 }
