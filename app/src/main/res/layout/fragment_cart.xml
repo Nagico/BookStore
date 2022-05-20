@@ -10,14 +10,19 @@
             android:layout_height="match_parent"
             tools:context=".fragments.main.CartFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cart_recycler_container"
-                android:paddingBottom="100dp"
-                android:clipToPadding="false"
+        <com.drake.statelayout.StateLayout
+                android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/theme_bg"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cart_recycler_container"
+                    android:paddingBottom="100dp"
+                    android:clipToPadding="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/theme_bg"/>
+        </com.drake.statelayout.StateLayout>
 
         <com.github.mmin18.widget.RealtimeBlurView
                 android:layout_width="match_parent"
@@ -35,7 +40,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_gravity="bottom"
                 app:layout_anchorGravity="bottom|center"
-                app:layout_anchor="@+id/cart_recycler_container">
+                app:layout_anchor="@+id/state">
             <CheckBox
                     android:id="@+id/cb_cart_all"
                     android:layout_width="wrap_content"

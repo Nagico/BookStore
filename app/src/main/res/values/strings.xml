@@ -46,4 +46,5 @@
     <string name="time_notification">超过支付时效后订单将被取消，请尽快完成支付</string>
     <string name="click_me">支付</string>
     <string name="search_result">搜索结果</string>
+    <string name="empty_content">什么也没有…</string>
 </resources>

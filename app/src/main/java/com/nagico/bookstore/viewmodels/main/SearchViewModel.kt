@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
+import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentSearchBinding
 import com.nagico.bookstore.fragments.main.HomeFragmentDirections
+import com.nagico.bookstore.fragments.main.SearchFragmentDirections
 import com.nagico.bookstore.models.Book
 import com.nagico.bookstore.models.BookInfoModel
 import com.nagico.bookstore.services.BookService
@@ -45,11 +47,9 @@ class SearchViewModel : ViewModel()  {
         mBinding.searchRecyclerContainer.linear().setup {
             addType<BookInfoModel>(R.layout.unit_book)
 
-            models = mBookService.search(query.value!!)
-
             onClick(R.id.book_info_layout) {
                 mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
-                val action = HomeFragmentDirections.actionPageHomeToBookDetailFragment((getModel() as BookInfoModel).id)
+                val action = SearchFragmentDirections.actionSearchFragmentToBookDetailFragment((getModel() as BookInfoModel).id)
                 mBinding.root.findNavController().navigate(action)
             }
         }
@@ -61,20 +61,21 @@ class SearchViewModel : ViewModel()  {
             }
         }
 
-
         mBinding.searchRecyclerContainer.layoutManager = layoutManager
 
         mBinding.searchRecyclerContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.layoutManager!!.findViewByPosition(1) == null) {
+                if (recyclerView.layoutManager!!.findViewByPosition(0) == null) {
                     mBinding.floatingActionButton.visibility = View.VISIBLE
                 } else {
                     mBinding.floatingActionButton.visibility = View.INVISIBLE
                 }
             }
         })
+
+        getData()
     }
 
     val toTop = View.OnClickListener {
@@ -85,5 +86,16 @@ class SearchViewModel : ViewModel()  {
     val back = View.OnClickListener {
         it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
         mBinding.root.findNavController().navigateUp()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getData() {
+        val res = mBookService.search(query.value!!)
+        if (res.isEmpty())
+            mBinding.state.showEmpty()
+        else
+            mBinding.state.showContent()
+        mBinding.searchRecyclerContainer.models = res
+        mBinding.searchRecyclerContainer.adapter?.notifyDataSetChanged()
     }
 }

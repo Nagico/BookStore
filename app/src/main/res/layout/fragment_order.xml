@@ -60,12 +60,18 @@
             </com.google.android.material.tabs.TabLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/order_recycler_container"
+        <com.drake.statelayout.StateLayout
+                android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/theme_bg"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/order_recycler_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/theme_bg"/>
+        </com.drake.statelayout.StateLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

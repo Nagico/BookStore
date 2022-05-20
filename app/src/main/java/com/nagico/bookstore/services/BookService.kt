@@ -36,11 +36,11 @@ class BookService private constructor(){
         bookDao.delete(book)
     }
 
-    fun search(query : String) : List<Book> {
+    fun search(query : String) : List<BookInfoModel> {
         return bookDao.queryBuilder().whereOr(
                 BookDao.Properties.Title.like("%$query%"),
                 BookDao.Properties.Author.like("%$query%")
-        ).build().list()
+        ).build().list().map { castBookToBookInfoModel(it) }
     }
 
     private fun castBookToBookInfoModel(it: Book): BookInfoModel {

@@ -54,6 +54,7 @@ class HomeViewModel : ViewModel() {
                    Toast.makeText(mActivity, "请输入搜索关键词", Toast.LENGTH_SHORT).show()
                    return@setOnEditorActionListener false
                 }
+                mBinding.searchText.clearFocus()
                 val action = HomeFragmentDirections.actionPageHomeToSearchFragment(mBinding.searchText.text.toString())
                 mBinding.root.findNavController().navigate(action)
                 return@setOnEditorActionListener false
@@ -103,7 +104,7 @@ class HomeViewModel : ViewModel() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.layoutManager!!.findViewByPosition(1) == null) {
+                if (recyclerView.layoutManager!!.findViewByPosition(0) == null) {
                     mBinding.floatingActionButton.visibility = View.VISIBLE
                 } else {
                     mBinding.floatingActionButton.visibility = View.INVISIBLE

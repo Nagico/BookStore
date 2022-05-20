@@ -104,7 +104,6 @@ class CartViewModel : ViewModel() {
     private fun initRecyclerView(){
         mBinding.cartRecyclerContainer.linear().setup {
             addType<CartInfoModel>(R.layout.unit_shopping_cart)
-             models = mCartService.getCartList(mUser.id)
 
             fun jumpToBookDetail(cartInfoModel: CartInfoModel){
                 mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
@@ -204,6 +203,8 @@ class CartViewModel : ViewModel() {
             }
 
         }
+
+        getData()
     }
 
     private fun calTotalAttrs() {
@@ -259,13 +260,21 @@ class CartViewModel : ViewModel() {
 
         payDialog.show(orderId)
 
-        mBinding.cartRecyclerContainer.models = mCartService.getCartList(mUser.id)
-        mBinding.cartRecyclerContainer.adapter?.notifyDataSetChanged()
+        getData()
         totalPrice.postValue(0.0)
         totalQuantity.postValue(0)
         totalChecked.postValue(false)
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getData() {
+        val res = mCartService.getCartList(mUser.id)
+        if (res.isEmpty())
+            mBinding.state.showEmpty()
+        else
+            mBinding.state.showContent()
+        mBinding.cartRecyclerContainer.models = res
+        mBinding.cartRecyclerContainer.adapter?.notifyDataSetChanged()
+    }
 
 }

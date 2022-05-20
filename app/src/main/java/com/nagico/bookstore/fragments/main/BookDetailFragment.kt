@@ -44,7 +44,6 @@ class BookDetailFragment : Fragment() {
     override fun onStop() {
         bar.visibility = View.VISIBLE
         super.onStop()
-
     }
     override fun onDestroyView() {
         super.onDestroyView()

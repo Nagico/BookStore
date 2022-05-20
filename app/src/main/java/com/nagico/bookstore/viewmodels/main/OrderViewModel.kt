@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
@@ -61,11 +62,9 @@ class OrderViewModel : ViewModel()  {
                 override fun onTabUnselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
                 }
 
-                @SuppressLint("NotifyDataSetChanged")
                 override fun onTabSelected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
                     type.value = tab?.position
-                    mBinding.orderRecyclerContainer.models = mOrderService.getOrderList(mUser.id, type.value!!)
-                    mBinding.orderRecyclerContainer.adapter?.notifyDataSetChanged()
+                    getData()
                 }
             }
         )
@@ -95,7 +94,7 @@ class OrderViewModel : ViewModel()  {
                 mOrderService.payOrder(payDialog.orderId!!, checkedRadioButton.text.toString())
                 mOrderService.finishOrder(payDialog.orderId!!)
                 Toast.makeText(mActivity, "支付成功", Toast.LENGTH_SHORT).show()
-                mBinding.orderRecyclerContainer.models = mOrderService.getOrderList(mUser.id, type.value!!)
+                getData()
                 payDialog.dismiss()
             }
             .build()
@@ -104,7 +103,8 @@ class OrderViewModel : ViewModel()  {
     private fun initRecyclerView(){
         mBinding.orderRecyclerContainer.linear().setup {
             addType<OrderInfoModel>(R.layout.unit_order)
-            models = mOrderService.getOrderList(mUser.id, 0)
+
+            setAnimation(AnimationType.ALPHA)
 
             fun jumpToOrderDetail(orderInfoModel: OrderInfoModel){
                 mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
@@ -133,10 +133,23 @@ class OrderViewModel : ViewModel()  {
                     .setPositiveButton("确定") { _, _ ->
                         mBinding.root.performHapticFeedback(HapticFeedbackConstants.CONFIRM, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
                         mOrderService.cancelOrder((getModel() as OrderInfoModel).id)
-                        mBinding.orderRecyclerContainer.models = mOrderService.getOrderList(mUser.id, type.value!!)
+                        getData()
                     }
                     .show()
             }
         }
+
+        getData()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getData() {
+        val res = mOrderService.getOrderList(mUser.id, type.value!!)
+        if (res.isEmpty())
+            mBinding.state.showEmpty()
+        else
+            mBinding.state.showContent()
+        mBinding.orderRecyclerContainer.models = res
+        mBinding.orderRecyclerContainer.adapter?.notifyDataSetChanged()
     }
 }
