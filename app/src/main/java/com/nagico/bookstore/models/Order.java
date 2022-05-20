@@ -2,10 +2,12 @@ package com.nagico.bookstore.models;
 
 import org.greenrobot.greendao.annotation.*;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.greenrobot.greendao.DaoException;
 import com.nagico.bookstore.dao.DaoSession;
@@ -40,6 +42,7 @@ public class Order {
     
     public String getOrderDateString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return sdf.format(this.CreatedAt);
     }
 
@@ -52,6 +55,7 @@ public class Order {
         if (this.PaidAt == null)
             return "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return sdf.format(this.PaidAt);
     }
 

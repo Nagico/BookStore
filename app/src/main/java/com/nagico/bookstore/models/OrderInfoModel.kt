@@ -24,6 +24,7 @@ class OrderInfoModel(
     val orderDateString: String
         get() = orderDate?.let {
             val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+            sdf.timeZone = TimeZone.getTimeZone("Asia/Shanghai")
             sdf.format(it)
         } ?: "未知"
 }

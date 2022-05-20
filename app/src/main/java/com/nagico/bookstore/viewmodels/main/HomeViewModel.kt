@@ -77,16 +77,18 @@ class HomeViewModel : ViewModel() {
                 return if(mBinding.homeRecyclerContainer.bindingAdapter.isHover(position)) 2 else 1
             }
         }
+
+
         mBinding.homeRecyclerContainer.layoutManager = layoutManager
 
         mBinding.homeRecyclerContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.layoutManager!!.findViewByPosition(0) == null) {
+                if (recyclerView.layoutManager!!.findViewByPosition(1) == null) {
                     mBinding.floatingActionButton.visibility = View.VISIBLE
                 } else {
-                    mBinding.floatingActionButton.visibility = View.GONE
+                    mBinding.floatingActionButton.visibility = View.INVISIBLE
                 }
             }
         })
