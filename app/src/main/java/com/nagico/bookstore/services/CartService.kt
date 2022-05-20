@@ -36,6 +36,7 @@ class CartService private constructor(){
         val cart = orderItemDao.queryBuilder()
             .where(OrderItemDao.Properties.CartId.eq(userId))
             .where(OrderItemDao.Properties.OrderId.isNull)
+            .orderDesc(OrderItemDao.Properties.UpdatedAt)
             .list()
         return cart.map { convertOrderItemToCartInfoModel(it) }
     }
@@ -78,7 +79,7 @@ class CartService private constructor(){
         userDao.update(user)
     }
 
-    fun checkout(userId: Long, itemIds: List<Long>) {
+    fun checkout(userId: Long, itemIds: List<Long>): Long {
         val order = Order()
         val user = userDao.load(userId)
         order.userId = userId
@@ -91,7 +92,7 @@ class CartService private constructor(){
             val book = orderItem.book
             val newItem = OrderItem(
                 null, order.id, null, orderItem.bookId, orderItem.quantity,
-                book.price, orderItem.createdAt, Date()
+                book.price, orderItem.createdAt, orderItem.updatedAt
             )
             user.cart.remove(orderItem)
             orderItemDao.delete(orderItem)
@@ -100,6 +101,8 @@ class CartService private constructor(){
         }
         orderDao.update(order)
         userDao.update(user)
+
+        return order.id
     }
 
 }

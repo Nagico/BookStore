@@ -55,11 +55,13 @@ class OrderService private constructor(){
         val result = if (type == 0) {
             orderDao.queryBuilder()
                 .where(OrderDao.Properties.UserId.eq(userId))
+                .orderDesc(OrderDao.Properties.UpdatedAt)
                 .list()
         } else {
             orderDao.queryBuilder()
                 .where(OrderDao.Properties.UserId.eq(userId))
                 .where(OrderDao.Properties.Status.eq(type))
+                .orderDesc(OrderDao.Properties.UpdatedAt)
                 .list()
         }
 
@@ -79,8 +81,38 @@ class OrderService private constructor(){
     }
 
     fun getOrderDetail(orderId : Long) : List<OrderDetailModel> {
-        val items = orderItemDao.queryBuilder().where(OrderItemDao.Properties.OrderId.eq(orderId)).list()
+        val items = orderItemDao.queryBuilder()
+            .where(OrderItemDao.Properties.OrderId.eq(orderId))
+            .orderDesc(OrderItemDao.Properties.UpdatedAt)
+            .list()
         return items.map { convertOrderItemToOrderDetailModel(it) }
+    }
+
+    fun cancelOrder(orderId : Long) {
+        val order = orderDao.load(orderId)
+        order?.status = Order.Status.CANCELLED.ordinal
+        orderDao.update(order)
+    }
+
+    fun payOrder(orderId : Long, paymentMethod: String) {
+        val order = orderDao.load(orderId)!!
+        val items = orderItemDao.queryBuilder()
+            .where(OrderItemDao.Properties.OrderId.eq(orderId))
+            .orderDesc(OrderItemDao.Properties.UpdatedAt)
+            .list()
+        order.status = Order.Status.DELIVERING.ordinal
+        order.paymentMethod = paymentMethod
+        order.paymentAmount = items.sumOf { it.price * it.quantity }
+        order.paidAt = Date()
+        order.updatedAt = Date()
+        orderDao.update(order)
+    }
+
+    fun finishOrder(orderId : Long) {
+        val order = orderDao.load(orderId)!!
+        order.status = Order.Status.DELIVERED.ordinal
+        order.updatedAt = Date()
+        orderDao.update(order)
     }
 
 }

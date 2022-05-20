@@ -19,4 +19,10 @@
     <color name="theme_alert">#e9391e</color>
     <color name="theme_bg">#F2F2F2</color>
     <color name="theme_bg_white">#FAF8F9</color>
+    <color name="text_color_pay_orange">#FF6600</color>
+    <color name="text_color_dialog_cancel_orange">#FF8900</color>
+    <color name="text_color_pay_bg">#F4F4F4</color>
+    <color name="text_color_pay_white">#FDFDFE</color>
+    <color name="text_color_pay_text_title">#4A4A4A</color>
+    <color name="text_color_pay_line">#E5E5E5</color>
 </resources>

@@ -69,4 +69,28 @@
         <item name="android:minWidth">24dp</item>
         <item name="android:minHeight">24dp</item>
     </style>
+
+    <!-- 自定义的AlertDialog的样式 -->
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/dialogWindowAnim</item>
+    </style>
+
+    <style mce_bogus="1" name="dialogWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/modal_in</item>
+        <item name="android:windowExitAnimation">@anim/modal_out</item>
+    </style>
+
+    <!-- 进出动画 -->
+    <style name="BottomDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
+    </style>
 </resources>

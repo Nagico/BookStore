@@ -3,8 +3,11 @@ package com.nagico.bookstore.viewmodels.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.HapticFeedbackConstants
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -24,12 +27,17 @@ import com.nagico.bookstore.models.CartInfoModel
 import com.nagico.bookstore.models.User
 import com.nagico.bookstore.services.BookStoreService
 import com.nagico.bookstore.services.CartService
+import com.nagico.bookstore.services.OrderService
+import com.nagico.bookstore.views.dialogs.PayDialog
+import com.nagico.bookstore.views.groups.MultiLineRadioGroup
 
 class CartViewModel : ViewModel() {
     private lateinit var mBinding: FragmentCartBinding
     @SuppressLint("StaticFieldLeak")
     private lateinit var mActivity: FragmentActivity
     private lateinit var mCartService: CartService
+    private lateinit var mOrderService: OrderService
+    private lateinit var payDialog: PayDialog
 
     private lateinit var mUser: User
 
@@ -44,17 +52,18 @@ class CartViewModel : ViewModel() {
     val totalQuantity by lazy {
         MutableLiveData<Int>()
     }
-
     fun init(binding: FragmentCartBinding, activity: FragmentActivity){
         mBinding = binding
         mActivity = activity
         mUser = BookStoreService.instance.getUser(mActivity)!!
         mCartService = CartService.instance
+        mOrderService = OrderService.instance
         totalChecked.value = false
         totalPrice.value = 0.0
         totalQuantity.value = 0
 
         initRecyclerView()
+        initDialog()
 
         mBinding.cbCartAll.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
@@ -64,7 +73,32 @@ class CartViewModel : ViewModel() {
                 unselectAll()
             }
         }
+    }
 
+    private fun initDialog() {
+        val payDialogView = LayoutInflater.from(mActivity).inflate(R.layout.dialog_pay, null)
+        val builder = PayDialog.Builder(mActivity)
+        payDialog = builder
+            .cancelTouchout(true)
+            .cancelTouchout(true)
+            .view(payDialogView)
+            .widthpx(ViewGroup.LayoutParams.MATCH_PARENT)
+            .heightpx(ViewGroup.LayoutParams.WRAP_CONTENT)
+            .style(R.style.AlertDialogStyle)
+            .addViewOnclick(R.id.tv_cancel) { v ->
+                Toast.makeText(mActivity, "取消支付", Toast.LENGTH_SHORT).show()
+                payDialog.dismiss()
+            }
+            .addViewOnclick(R.id.tv_ok) { v ->
+                val multiLineRadioGroup: MultiLineRadioGroup = payDialogView.findViewById(R.id.rg_pay_type)
+                val checkedRadioButton: RadioButton =
+                    payDialogView.findViewById(multiLineRadioGroup.checkedRadioButtonId)
+                mOrderService.payOrder(payDialog.orderId!!, checkedRadioButton.text.toString())
+                mOrderService.finishOrder(payDialog.orderId!!)
+                Toast.makeText(mActivity, "支付成功", Toast.LENGTH_SHORT).show()
+                payDialog.dismiss()
+            }
+            .build()
     }
 
     private fun initRecyclerView(){
@@ -221,7 +255,10 @@ class CartViewModel : ViewModel() {
             Toast.makeText(mActivity, "请选择要结算的商品", Toast.LENGTH_SHORT).show()
             return@OnClickListener
         }
-        mCartService.checkout(mUser.id, checkoutIds)
+        val orderId = mCartService.checkout(mUser.id, checkoutIds)
+
+        payDialog.show(orderId)
+
         mBinding.cartRecyclerContainer.models = mCartService.getCartList(mUser.id)
         mBinding.cartRecyclerContainer.adapter?.notifyDataSetChanged()
         totalPrice.postValue(0.0)

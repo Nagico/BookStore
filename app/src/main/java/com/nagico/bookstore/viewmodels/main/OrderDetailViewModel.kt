@@ -2,6 +2,7 @@ package com.nagico.bookstore.viewmodels.main
 
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,6 +52,11 @@ class OrderDetailViewModel : ViewModel() {
             }
         }
 
+    }
+
+    fun back() = View.OnClickListener {
+        it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
+        mBinding.root.findNavController().navigateUp()
     }
 
 }
