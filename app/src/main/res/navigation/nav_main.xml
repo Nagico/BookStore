@@ -13,6 +13,9 @@
                 app:enterAnim="@anim/fragment_enter"
                 app:exitAnim="@anim/fragment_exit" app:popEnterAnim="@anim/fragment_pop_enter"
                 app:popExitAnim="@anim/fragment_pop_exit"/>
+        <action android:id="@+id/action_page_home_to_searchFragment" app:destination="@id/searchFragment"
+                app:enterAnim="@anim/fragment_enter" app:exitAnim="@anim/fragment_exit"
+                app:popEnterAnim="@anim/fragment_pop_enter" app:popExitAnim="@anim/fragment_pop_exit"/>
     </fragment>
     <fragment
             android:id="@+id/page_cart"
@@ -44,5 +47,12 @@
                 app:destination="@id/bookDetailFragment" app:enterAnim="@anim/fragment_enter"
                 app:exitAnim="@anim/fragment_exit" app:popEnterAnim="@anim/fragment_pop_enter"
                 app:popExitAnim="@anim/fragment_pop_exit"/>
+    </fragment>
+    <fragment android:id="@+id/searchFragment" android:name="com.nagico.bookstore.fragments.main.SearchFragment"
+              android:label="SearchFragment">
+        <action android:id="@+id/action_searchFragment_to_bookDetailFragment" app:destination="@id/bookDetailFragment"
+                app:enterAnim="@anim/fragment_enter" app:exitAnim="@anim/fragment_exit"
+                app:popEnterAnim="@anim/fragment_pop_enter" app:popExitAnim="@anim/fragment_pop_exit"/>
+        <argument android:name="query" app:argType="string"/>
     </fragment>
 </navigation>

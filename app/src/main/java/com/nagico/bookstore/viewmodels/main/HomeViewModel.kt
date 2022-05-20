@@ -3,6 +3,8 @@ package com.nagico.bookstore.viewmodels.main
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -15,11 +17,14 @@ import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.google.android.material.textfield.TextInputEditText
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentHomeBinding
 import com.nagico.bookstore.fragments.main.HomeFragmentDirections
+import com.nagico.bookstore.fragments.main.SearchFragmentDirections
 import com.nagico.bookstore.models.BookInfoHoverHeaderModel
 import com.nagico.bookstore.models.BookInfoModel
+import com.nagico.bookstore.models.CartInfoModel
 import com.nagico.bookstore.models.User
 import com.nagico.bookstore.services.BookService
 import com.nagico.bookstore.services.BookStoreService
@@ -42,6 +47,19 @@ class HomeViewModel : ViewModel() {
         mBookService = BookService.instance
 
         initRecyclerView()
+
+        mBinding.searchText.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (mBinding.searchText.text.isNullOrEmpty()) {
+                   Toast.makeText(mActivity, "请输入搜索关键词", Toast.LENGTH_SHORT).show()
+                   return@setOnEditorActionListener false
+                }
+                val action = HomeFragmentDirections.actionPageHomeToSearchFragment(mBinding.searchText.text.toString())
+                mBinding.root.findNavController().navigate(action)
+                return@setOnEditorActionListener false
+            }
+            return@setOnEditorActionListener false
+        }
 
     }
 
