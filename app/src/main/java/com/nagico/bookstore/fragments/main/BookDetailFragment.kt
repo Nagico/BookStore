@@ -23,7 +23,7 @@ class BookDetailFragment : Fragment() {
     private val mBinding get() = _binding!!
     private val mViewModel: BookDetailViewModel by viewModels()
     private lateinit var bar: BottomNavigationView
-    val args: BookDetailFragmentArgs by navArgs()
+    private val args: BookDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +42,11 @@ class BookDetailFragment : Fragment() {
     }
 
     override fun onStop() {
+        bar.visibility = View.VISIBLE
         super.onStop()
 
     }
     override fun onDestroyView() {
-        bar.visibility = View.VISIBLE
         super.onDestroyView()
         _binding = null
     }

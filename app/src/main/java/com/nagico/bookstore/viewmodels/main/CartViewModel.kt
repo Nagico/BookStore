@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
+import com.drake.brv.utils.mutable
 import com.drake.brv.utils.setup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -102,6 +103,7 @@ class CartViewModel : ViewModel() {
                         mutable.removeAt(adapterPosition)
                         mCartService.removeFromCart(mUser.id, (getModel() as CartInfoModel).id)
                         adapter.notifyItemRemoved(adapterPosition)
+                        calTotalAttrs()
                     }
                     .show()
             }
@@ -112,6 +114,7 @@ class CartViewModel : ViewModel() {
                 mCartService.updateQuantity(mUser.id, cartInfoModel.id, cartInfoModel.quantity + 1)
                 cartInfoModel.quantity += 1
                 adapter.notifyItemChanged(adapterPosition)
+                calTotalAttrs()
             }
 
             R.id.btn_del.onClick {
@@ -121,6 +124,7 @@ class CartViewModel : ViewModel() {
                     mCartService.updateQuantity(mUser.id, cartInfoModel.id, cartInfoModel.quantity - 1)
                     cartInfoModel.quantity -= 1
                     adapter.notifyItemChanged(adapterPosition)
+                    calTotalAttrs()
                 }
             }
 
@@ -134,6 +138,7 @@ class CartViewModel : ViewModel() {
                                 mCartService.updateQuantity(mUser.id, cartInfoModel.id, quantity)
                                 cartInfoModel.quantity = quantity
                                 adapter.notifyItemChanged(adapterPosition)
+                                calTotalAttrs()
                                 return@setOnEditorActionListener false
                             } else {
                                 Toast.makeText(context, "数量不能小于1", Toast.LENGTH_SHORT).show()
@@ -200,6 +205,28 @@ class CartViewModel : ViewModel() {
         }
         mBinding.cartRecyclerContainer.adapter?.notifyDataSetChanged()
         calTotalAttrs()
+    }
+
+    fun checkout() = View.OnClickListener {
+        mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
+        val checkoutIds = mutableListOf<Long>()
+        mBinding.cartRecyclerContainer.models?.forEach {
+            if(it is CartInfoModel){
+                if(it.checked){
+                    checkoutIds.add(it.id)
+                }
+            }
+        }
+        if(checkoutIds.isEmpty()){
+            Toast.makeText(mActivity, "请选择要结算的商品", Toast.LENGTH_SHORT).show()
+            return@OnClickListener
+        }
+        mCartService.checkout(mUser.id, checkoutIds)
+        mBinding.cartRecyclerContainer.models = mCartService.getCartList(mUser.id)
+        mBinding.cartRecyclerContainer.adapter?.notifyDataSetChanged()
+        totalPrice.postValue(0.0)
+        totalQuantity.postValue(0)
+        totalChecked.postValue(false)
     }
 
 

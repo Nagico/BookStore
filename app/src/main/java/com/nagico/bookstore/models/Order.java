@@ -2,8 +2,11 @@ package com.nagico.bookstore.models;
 
 import org.greenrobot.greendao.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import org.greenrobot.greendao.DaoException;
 import com.nagico.bookstore.dao.DaoSession;
 import com.nagico.bookstore.dao.OrderItemDao;
@@ -26,11 +29,46 @@ public class Order {
 
     private String paymentMethod;
 
+    private int status;
+
+    private double paymentAmount;
+
     @Property
     private Date CreatedAt;
 
+    private transient String orderDateString;
+    
+    public String getOrderDateString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        return sdf.format(this.CreatedAt);
+    }
+
     @Property
     private Date PaidAt;
+
+    private transient String payDateString;
+
+    public String getPayDateString() {
+        if (this.PaidAt == null)
+            return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        return sdf.format(this.PaidAt);
+    }
+
+    public String getStatusString() {
+        switch (this.status) {
+            case 1:
+                return "待付款";
+            case 2:
+                return "待收货";
+            case 3:
+                return "已完成";
+            case 4:
+                return "已取消";
+            default:
+                return "未知";
+        }
+    }
 
     @Property
     private Date UpdatedAt;
@@ -43,12 +81,14 @@ public class Order {
     @Generated(hash = 949219203)
     private transient OrderDao myDao;
 
-    @Generated(hash = 2123151073)
-    public Order(Long id, @NotNull Long userId, String paymentMethod, Date CreatedAt, Date PaidAt,
-            Date UpdatedAt) {
+    @Generated(hash = 2134324204)
+    public Order(Long id, @NotNull Long userId, String paymentMethod, int status, double paymentAmount,
+            Date CreatedAt, Date PaidAt, Date UpdatedAt) {
         this.id = id;
         this.userId = userId;
         this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.paymentAmount = paymentAmount;
         this.CreatedAt = CreatedAt;
         this.PaidAt = PaidAt;
         this.UpdatedAt = UpdatedAt;
@@ -72,6 +112,46 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getPaymentMethod() {
+        return this.paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreatedAt() {
+        return this.CreatedAt;
+    }
+
+    public void setCreatedAt(Date CreatedAt) {
+        this.CreatedAt = CreatedAt;
+    }
+
+    public Date getPaidAt() {
+        return this.PaidAt;
+    }
+
+    public void setPaidAt(Date PaidAt) {
+        this.PaidAt = PaidAt;
+    }
+
+    public Date getUpdatedAt() {
+        return this.UpdatedAt;
+    }
+
+    public void setUpdatedAt(Date UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
 
     @Generated(hash = 251390918)
@@ -181,35 +261,15 @@ public class Order {
         myDao = daoSession != null ? daoSession.getOrderDao() : null;
     }
 
-    public Date getCreatedAt() {
-        return this.CreatedAt;
+    public double getPaymentAmount() {
+        return this.paymentAmount;
     }
 
-    public void setCreatedAt(Date CreatedAt) {
-        this.CreatedAt = CreatedAt;
+    public void setPaymentAmount(double paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
-    public Date getUpdatedAt() {
-        return this.UpdatedAt;
-    }
-
-    public void setUpdatedAt(Date UpdatedAt) {
-        this.UpdatedAt = UpdatedAt;
-    }
-
-    public Date getPaidAt() {
-        return this.PaidAt;
-    }
-
-    public void setPaidAt(Date PaidAt) {
-        this.PaidAt = PaidAt;
-    }
-
-    public String getPaymentMethod() {
-        return this.paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public enum Status {
+        ALL, UNPAID, DELIVERING, DELIVERED, CANCELLED
     }
 }

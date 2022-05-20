@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Android SQLite" uuid="d060cdc3-5436-4dc0-9b84-278391d786c9">
+    <data-source source="LOCAL" name="Android SQLite" uuid="889f71a2-581c-4c79-973f-48ac66dbd2a5">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\co\AppData\Local\JetBrains\IntelliJIdea2022.1\android\databases\EMULATOR_Pixel_5_API_30\com.nagico.bookstore\internal\bookstore.db</jdbc-url>
@@ -11,12 +11,6 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
         </library>
       </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Android SQLite Xiaomi" uuid="08cdf25c-fc60-4f3c-ab9b-0666a33a5ede">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\co\AppData\Local\JetBrains\IntelliJIdea2022.1\android\databases\SERIAL_NUMBER_192_168_10_141_37371\com.nagico.bookstore\internal\bookstore.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

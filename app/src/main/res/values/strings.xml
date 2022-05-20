@@ -29,4 +29,11 @@
     <string name="canceled">已取消</string>
     <string name="more">更多</string>
     <string name="init_db">点击初始化数据</string>
+    <string name="pay">支付</string>
+    <string name="cancel">取消</string>
+    <string name="order_id_hint">订单编号:</string>
+    <string name="order_time_hint">下单时间:</string>
+    <string name="pay_method_hint">支付方式:</string>
+    <string name="pay_time_hint">支付时间:</string>
+    <string name="pay_price_hint">付款金额:</string>
 </resources>

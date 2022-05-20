@@ -32,9 +32,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property UserId = new Property(1, Long.class, "userId", false, "USER_ID");
         public final static Property PaymentMethod = new Property(2, String.class, "paymentMethod", false, "PAYMENT_METHOD");
-        public final static Property CreatedAt = new Property(3, java.util.Date.class, "CreatedAt", false, "CREATED_AT");
-        public final static Property PaidAt = new Property(4, java.util.Date.class, "PaidAt", false, "PAID_AT");
-        public final static Property UpdatedAt = new Property(5, java.util.Date.class, "UpdatedAt", false, "UPDATED_AT");
+        public final static Property Status = new Property(3, int.class, "status", false, "STATUS");
+        public final static Property PaymentAmount = new Property(4, double.class, "paymentAmount", false, "PAYMENT_AMOUNT");
+        public final static Property CreatedAt = new Property(5, java.util.Date.class, "CreatedAt", false, "CREATED_AT");
+        public final static Property PaidAt = new Property(6, java.util.Date.class, "PaidAt", false, "PAID_AT");
+        public final static Property UpdatedAt = new Property(7, java.util.Date.class, "UpdatedAt", false, "UPDATED_AT");
     }
 
     private DaoSession daoSession;
@@ -56,9 +58,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"USER_ID\" INTEGER NOT NULL ," + // 1: userId
                 "\"PAYMENT_METHOD\" TEXT," + // 2: paymentMethod
-                "\"CREATED_AT\" INTEGER," + // 3: CreatedAt
-                "\"PAID_AT\" INTEGER," + // 4: PaidAt
-                "\"UPDATED_AT\" INTEGER);"); // 5: UpdatedAt
+                "\"STATUS\" INTEGER NOT NULL ," + // 3: status
+                "\"PAYMENT_AMOUNT\" REAL NOT NULL ," + // 4: paymentAmount
+                "\"CREATED_AT\" INTEGER," + // 5: CreatedAt
+                "\"PAID_AT\" INTEGER," + // 6: PaidAt
+                "\"UPDATED_AT\" INTEGER);"); // 7: UpdatedAt
     }
 
     /** Drops the underlying database table. */
@@ -81,20 +85,22 @@ public class OrderDao extends AbstractDao<Order, Long> {
         if (paymentMethod != null) {
             stmt.bindString(3, paymentMethod);
         }
+        stmt.bindLong(4, entity.getStatus());
+        stmt.bindDouble(5, entity.getPaymentAmount());
  
         java.util.Date CreatedAt = entity.getCreatedAt();
         if (CreatedAt != null) {
-            stmt.bindLong(4, CreatedAt.getTime());
+            stmt.bindLong(6, CreatedAt.getTime());
         }
  
         java.util.Date PaidAt = entity.getPaidAt();
         if (PaidAt != null) {
-            stmt.bindLong(5, PaidAt.getTime());
+            stmt.bindLong(7, PaidAt.getTime());
         }
  
         java.util.Date UpdatedAt = entity.getUpdatedAt();
         if (UpdatedAt != null) {
-            stmt.bindLong(6, UpdatedAt.getTime());
+            stmt.bindLong(8, UpdatedAt.getTime());
         }
     }
 
@@ -112,20 +118,22 @@ public class OrderDao extends AbstractDao<Order, Long> {
         if (paymentMethod != null) {
             stmt.bindString(3, paymentMethod);
         }
+        stmt.bindLong(4, entity.getStatus());
+        stmt.bindDouble(5, entity.getPaymentAmount());
  
         java.util.Date CreatedAt = entity.getCreatedAt();
         if (CreatedAt != null) {
-            stmt.bindLong(4, CreatedAt.getTime());
+            stmt.bindLong(6, CreatedAt.getTime());
         }
  
         java.util.Date PaidAt = entity.getPaidAt();
         if (PaidAt != null) {
-            stmt.bindLong(5, PaidAt.getTime());
+            stmt.bindLong(7, PaidAt.getTime());
         }
  
         java.util.Date UpdatedAt = entity.getUpdatedAt();
         if (UpdatedAt != null) {
-            stmt.bindLong(6, UpdatedAt.getTime());
+            stmt.bindLong(8, UpdatedAt.getTime());
         }
     }
 
@@ -146,9 +154,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getLong(offset + 1), // userId
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // paymentMethod
-            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // CreatedAt
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // PaidAt
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)) // UpdatedAt
+            cursor.getInt(offset + 3), // status
+            cursor.getDouble(offset + 4), // paymentAmount
+            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // CreatedAt
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // PaidAt
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)) // UpdatedAt
         );
         return entity;
     }
@@ -158,9 +168,11 @@ public class OrderDao extends AbstractDao<Order, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUserId(cursor.getLong(offset + 1));
         entity.setPaymentMethod(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCreatedAt(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setPaidAt(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setUpdatedAt(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setStatus(cursor.getInt(offset + 3));
+        entity.setPaymentAmount(cursor.getDouble(offset + 4));
+        entity.setCreatedAt(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setPaidAt(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setUpdatedAt(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
      }
     
     @Override

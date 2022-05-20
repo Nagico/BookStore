@@ -1,8 +1,10 @@
 package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.DBManager
+import com.nagico.bookstore.dao.OrderDao
 import com.nagico.bookstore.dao.OrderItemDao
 import com.nagico.bookstore.models.CartInfoModel
+import com.nagico.bookstore.models.Order
 import com.nagico.bookstore.models.OrderItem
 import java.util.Date
 
@@ -33,12 +35,9 @@ class CartService private constructor(){
     fun getCartList(userId: Long): List<CartInfoModel> {
         val cart = orderItemDao.queryBuilder()
             .where(OrderItemDao.Properties.CartId.eq(userId))
+            .where(OrderItemDao.Properties.OrderId.isNull)
             .list()
-        val res = mutableListOf<CartInfoModel>()
-        cart.forEach {
-            res.add(convertOrderItemToCartInfoModel(it))
-        }
-        return res
+        return cart.map { convertOrderItemToCartInfoModel(it) }
     }
 
     fun addToCart(userId: Long, bookId: Long) {
@@ -76,6 +75,30 @@ class CartService private constructor(){
         orderItem.updatedAt = Date()
         user.cart.remove(orderItem)
         user.cart.add(orderItem)
+        userDao.update(user)
+    }
+
+    fun checkout(userId: Long, itemIds: List<Long>) {
+        val order = Order()
+        val user = userDao.load(userId)
+        order.userId = userId
+        order.status = Order.Status.UNPAID.ordinal
+        order.createdAt = Date()
+        order.updatedAt = Date()
+        orderDao.insert(order)
+        itemIds.forEach {
+            val orderItem = orderItemDao.load(it)
+            val book = orderItem.book
+            val newItem = OrderItem(
+                null, order.id, null, orderItem.bookId, orderItem.quantity,
+                book.price, orderItem.createdAt, Date()
+            )
+            user.cart.remove(orderItem)
+            orderItemDao.delete(orderItem)
+            orderItemDao.insert(newItem)
+            order.orderItems.add(newItem)
+        }
+        orderDao.update(order)
         userDao.update(user)
     }
 

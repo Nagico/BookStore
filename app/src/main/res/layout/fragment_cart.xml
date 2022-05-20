@@ -60,6 +60,7 @@
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:textSize="16sp"
+                    android:onClick="@{cartViewModel.checkout()}"
                     android:text="@{`去结算(`+cartViewModel.totalQuantity+`)`}"
                     app:shapeAppearance="@style/CircleStyle"
                     android:textStyle="bold"
