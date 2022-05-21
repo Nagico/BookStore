@@ -48,12 +48,15 @@ class OrderViewModel : ViewModel()  {
         mBinding.orderTabLayout.addOnTabSelectedListener(
             object : com.google.android.material.tabs.TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
+                    mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
+
                 }
 
                 override fun onTabUnselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
                 }
 
                 override fun onTabSelected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
+                    mBinding.root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
                     type.value = tab?.position
                     getData()
                 }
