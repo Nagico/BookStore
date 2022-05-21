@@ -1,11 +1,10 @@
 package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.DBManager
-import com.nagico.bookstore.dao.OrderDao
 import com.nagico.bookstore.dao.OrderItemDao
 import com.nagico.bookstore.models.CartInfoModel
-import com.nagico.bookstore.models.Order
-import com.nagico.bookstore.models.OrderItem
+import com.nagico.bookstore.models.entity.Order
+import com.nagico.bookstore.models.entity.OrderItem
 import java.util.Date
 
 class CartService private constructor(){

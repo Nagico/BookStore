@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.nagico.bookstore.databinding.FragmentBookDetailBinding
-import com.nagico.bookstore.models.Book
+import com.nagico.bookstore.models.entity.Book
 import com.nagico.bookstore.services.BookService
 import com.nagico.bookstore.services.BookStoreService
 import com.nagico.bookstore.services.CartService

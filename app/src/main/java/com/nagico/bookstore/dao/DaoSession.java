@@ -8,11 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.nagico.bookstore.models.Book;
-import com.nagico.bookstore.models.Category;
-import com.nagico.bookstore.models.Order;
-import com.nagico.bookstore.models.OrderItem;
-import com.nagico.bookstore.models.User;
+import com.nagico.bookstore.models.entity.Book;
+import com.nagico.bookstore.models.entity.Category;
+import com.nagico.bookstore.models.entity.Order;
+import com.nagico.bookstore.models.entity.OrderItem;
+import com.nagico.bookstore.models.entity.User;
 
 import com.nagico.bookstore.dao.BookDao;
 import com.nagico.bookstore.dao.CategoryDao;

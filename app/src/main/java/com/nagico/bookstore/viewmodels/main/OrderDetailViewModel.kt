@@ -12,7 +12,7 @@ import com.drake.brv.utils.setup
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentOrderDetailBinding
 import com.nagico.bookstore.fragments.main.OrderDetailFragmentDirections
-import com.nagico.bookstore.models.Order
+import com.nagico.bookstore.models.entity.Order
 import com.nagico.bookstore.models.OrderDetailModel
 import com.nagico.bookstore.services.OrderService
 

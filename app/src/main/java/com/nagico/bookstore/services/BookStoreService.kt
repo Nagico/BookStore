@@ -2,7 +2,7 @@ package com.nagico.bookstore.services
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import com.nagico.bookstore.models.User
+import com.nagico.bookstore.models.entity.User
 import com.nagico.bookstore.viewmodels.BookstoreViewModel
 
 class BookStoreService private constructor(){

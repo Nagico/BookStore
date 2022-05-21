@@ -1,4 +1,4 @@
-package com.nagico.bookstore.models;
+package com.nagico.bookstore.models.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;

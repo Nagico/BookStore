@@ -1,7 +1,7 @@
 package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.DBManager
-import com.nagico.bookstore.models.Category
+import com.nagico.bookstore.models.entity.Category
 
 class CategoryService private constructor(){
     private val categoryDao = DBManager.instance.daoSession.categoryDao

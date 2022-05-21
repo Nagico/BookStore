@@ -2,7 +2,7 @@ package com.nagico.bookstore.services
 
 import com.nagico.bookstore.dao.BookDao
 import com.nagico.bookstore.dao.DBManager
-import com.nagico.bookstore.models.Book
+import com.nagico.bookstore.models.entity.Book
 import com.nagico.bookstore.models.BookInfoHoverHeaderModel
 import com.nagico.bookstore.models.BookInfoModel
 

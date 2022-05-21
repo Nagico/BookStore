@@ -16,9 +16,7 @@ import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentSearchBinding
-import com.nagico.bookstore.fragments.main.HomeFragmentDirections
 import com.nagico.bookstore.fragments.main.SearchFragmentDirections
-import com.nagico.bookstore.models.Book
 import com.nagico.bookstore.models.BookInfoModel
 import com.nagico.bookstore.services.BookService
 

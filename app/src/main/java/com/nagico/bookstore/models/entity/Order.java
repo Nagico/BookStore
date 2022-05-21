@@ -1,8 +1,7 @@
-package com.nagico.bookstore.models;
+package com.nagico.bookstore.models.entity;
 
 import org.greenrobot.greendao.annotation.*;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

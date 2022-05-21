@@ -17,15 +17,12 @@ import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import com.google.android.material.textfield.TextInputEditText
 import com.nagico.bookstore.R
 import com.nagico.bookstore.databinding.FragmentHomeBinding
 import com.nagico.bookstore.fragments.main.HomeFragmentDirections
-import com.nagico.bookstore.fragments.main.SearchFragmentDirections
 import com.nagico.bookstore.models.BookInfoHoverHeaderModel
 import com.nagico.bookstore.models.BookInfoModel
-import com.nagico.bookstore.models.CartInfoModel
-import com.nagico.bookstore.models.User
+import com.nagico.bookstore.models.entity.User
 import com.nagico.bookstore.services.BookService
 import com.nagico.bookstore.services.BookStoreService
 

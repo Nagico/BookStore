@@ -1,5 +1,6 @@
-package com.nagico.bookstore.models;
+package com.nagico.bookstore.models.entity;
 
+import com.nagico.bookstore.models.entity.Book;
 import org.greenrobot.greendao.annotation.*;
 
 import java.util.Date;

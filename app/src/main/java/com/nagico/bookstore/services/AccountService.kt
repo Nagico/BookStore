@@ -3,7 +3,7 @@ package com.nagico.bookstore.services
 import android.content.Context
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.dao.UserDao
-import com.nagico.bookstore.models.User
+import com.nagico.bookstore.models.entity.User
 import com.nagico.bookstore.services.exception.account.SignInError
 import com.nagico.bookstore.services.exception.account.SignUpError
 import com.nagico.bookstore.utils.EncryptionUtil
@@ -33,7 +33,13 @@ class AccountService private constructor(){
     fun signUp(username: String, password: String): User {
         val user = dao.queryBuilder().where(UserDao.Properties.Username.eq(username)).unique()
         if (user != null) throw SignUpError("username", "用户名已存在")
-        val newUser = User(null, username, EncryptionUtil.getEncryptedPassword(password, salt), Date(), Date())
+        val newUser = User(
+            null,
+            username,
+            EncryptionUtil.getEncryptedPassword(password, salt),
+            Date(),
+            Date()
+        )
 
         dao.insert(newUser)
         return newUser

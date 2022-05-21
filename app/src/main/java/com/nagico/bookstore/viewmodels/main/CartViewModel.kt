@@ -1,7 +1,6 @@
 package com.nagico.bookstore.viewmodels.main
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
-import com.drake.brv.utils.mutable
 import com.drake.brv.utils.setup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -24,7 +22,7 @@ import com.nagico.bookstore.databinding.FragmentCartBinding
 import com.nagico.bookstore.databinding.UnitShoppingCartBinding
 import com.nagico.bookstore.fragments.main.CartFragmentDirections
 import com.nagico.bookstore.models.CartInfoModel
-import com.nagico.bookstore.models.User
+import com.nagico.bookstore.models.entity.User
 import com.nagico.bookstore.services.BookStoreService
 import com.nagico.bookstore.services.CartService
 import com.nagico.bookstore.services.OrderService

@@ -3,11 +3,10 @@ package com.nagico.bookstore.services
 import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.dao.OrderDao
 import com.nagico.bookstore.dao.OrderItemDao
-import com.nagico.bookstore.models.Order
+import com.nagico.bookstore.models.entity.Order
 import com.nagico.bookstore.models.OrderDetailModel
 import com.nagico.bookstore.models.OrderInfoModel
-import com.nagico.bookstore.models.OrderItem
-import java.text.SimpleDateFormat
+import com.nagico.bookstore.models.entity.OrderItem
 import java.util.*
 
 class OrderService private constructor(){
