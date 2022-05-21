@@ -31,13 +31,17 @@ class OrderDetailFragment : Fragment() {
         _binding = FragmentOrderDetailBinding.inflate(inflater, container, false)
 
         bar = activity?.findViewById(R.id.bottom_navigation)!!
-        bar.visibility = View.GONE
 
         mBinding.lifecycleOwner = this
         mBinding.orderDetailViewModel = mViewModel
         mViewModel.init(mBinding, activity!!, args.orderID)
 
         return mBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bar.visibility = View.GONE
     }
 
     override fun onStop() {

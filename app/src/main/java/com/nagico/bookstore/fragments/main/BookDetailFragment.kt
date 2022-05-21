@@ -32,13 +32,17 @@ class BookDetailFragment : Fragment() {
         _binding = FragmentBookDetailBinding.inflate(inflater, container, false)
 
         bar = activity?.findViewById(R.id.bottom_navigation)!!
-        bar.visibility = View.GONE
 
         mBinding.lifecycleOwner = this
         mBinding.bookDetailViewModel = mViewModel
         mViewModel.init(mBinding, activity!!, args.bookId)
 
         return mBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bar.visibility = View.GONE
     }
 
     override fun onStop() {
