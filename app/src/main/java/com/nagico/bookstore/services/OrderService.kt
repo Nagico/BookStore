@@ -36,7 +36,7 @@ class OrderService private constructor(){
         val size = items.size
         val cover1 = items[0].book.cover
         val cover2 = if (size > 1) items[1].book.cover else ""
-        val totalPrice = items.sumOf { it.price }
+        val totalPrice = items.sumOf { it.price * it.quantity }
         val totalQuantity = items.sumOf { it.quantity }
         return OrderInfoModel(
             order.id,
