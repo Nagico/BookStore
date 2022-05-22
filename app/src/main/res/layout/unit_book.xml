@@ -76,7 +76,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="22dp"/>
+                android:layout_marginBottom="24dp"/>
         <TextView
                 android:id="@+id/txt_price"
                 android:text="@{m.price}"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/txt_price_icon" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="22dp" android:layout_marginStart="2dp" android:textStyle="bold"/>
+                android:layout_marginBottom="22dp" android:layout_marginStart="0dp" android:textStyle="bold"/>
         <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp" app:srcCompat="@drawable/ic_star" android:id="@+id/ic_star"

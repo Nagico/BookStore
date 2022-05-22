@@ -53,7 +53,7 @@
                     android:id="@+id/txt_total_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{`合计:￥`+String.format(`%.1f`, cartViewModel.totalPrice)}" app:layout_constraintStart_toEndOf="@+id/cb_cart_all"
+                    android:text="@{`合计:￥`+String.format(`%.2f`, cartViewModel.totalPrice)}" app:layout_constraintStart_toEndOf="@+id/cb_cart_all"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="24dp" android:textSize="20sp" android:textColor="@color/black"/>
             <Button
