@@ -160,10 +160,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
         <com.github.mmin18.widget.RealtimeBlurView
+                android:id="@+id/blur_view"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 app:realtimeBlurRadius="10dp"
                 android:layout_gravity="bottom"
+                android:visibility="gone"
                 app:layout_anchorGravity="bottom|center"
                 app:realtimeOverlayColor="#2DFFFFFF"/>
         <Button

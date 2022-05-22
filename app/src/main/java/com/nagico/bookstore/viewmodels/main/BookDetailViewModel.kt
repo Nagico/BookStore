@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.nagico.bookstore.databinding.FragmentBookDetailBinding
+import com.nagico.bookstore.models.BookModel
 import com.nagico.bookstore.models.entity.Book
 import com.nagico.bookstore.services.BookService
 import com.nagico.bookstore.services.BookStoreService
@@ -23,7 +24,7 @@ class BookDetailViewModel : ViewModel() {
     private lateinit var mBookStoreService: BookStoreService
 
     val book by lazy {
-        MutableLiveData<Book>()
+        MutableLiveData<BookModel>()
     }
 
     fun init(binding: FragmentBookDetailBinding, activity: FragmentActivity, bookId: Long){
@@ -33,7 +34,7 @@ class BookDetailViewModel : ViewModel() {
         mBookService = BookService.instance
         mCartService = CartService.instance
         mBookStoreService = BookStoreService.instance
-        book.value = mBookService.get(bookId)
+        book.value = mBookService.getBookDetail(bookId)
     }
 
     fun addCart() = OnClickListener {

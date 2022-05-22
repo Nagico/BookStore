@@ -5,6 +5,7 @@ import com.nagico.bookstore.dao.DBManager
 import com.nagico.bookstore.models.entity.Book
 import com.nagico.bookstore.models.BookInfoHoverHeaderModel
 import com.nagico.bookstore.models.BookInfoModel
+import com.nagico.bookstore.models.BookModel
 
 class BookService private constructor(){
     private val bookDao = DBManager.instance.daoSession.bookDao
@@ -40,10 +41,10 @@ class BookService private constructor(){
         return bookDao.queryBuilder().whereOr(
                 BookDao.Properties.Title.like("%$query%"),
                 BookDao.Properties.Author.like("%$query%")
-        ).build().list().map { castBookToBookInfoModel(it) }
+        ).build().list().map { convertBookToBookInfoModel(it) }
     }
 
-    private fun castBookToBookInfoModel(it: Book): BookInfoModel {
+    private fun convertBookToBookInfoModel(it: Book): BookInfoModel {
         val bookInfo = BookInfoModel()
         bookInfo.id = it.id
         bookInfo.title = it.title
@@ -64,9 +65,30 @@ class BookService private constructor(){
             result.add(header)
             val books = bookDao.queryBuilder().where(BookDao.Properties.CategoryId.eq(category.id)).build().list()
             books.forEach {
-                result.add(castBookToBookInfoModel(it))
+                result.add(convertBookToBookInfoModel(it))
             }
         }
         return result
+    }
+
+    private fun covertBookToBookModel(it: Book): BookModel {
+        return BookModel(
+            it.id,
+            it.title,
+            it.author,
+            it.isbn,
+            it.cover,
+            it.color,
+            it.score,
+            it.description,
+            it.categoryId,
+            it.price,
+            it.createdAt,
+            it.updatedAt
+                )
+    }
+
+    fun getBookDetail(id : Long) : BookModel {
+        return covertBookToBookModel(bookDao.load(id))
     }
 }

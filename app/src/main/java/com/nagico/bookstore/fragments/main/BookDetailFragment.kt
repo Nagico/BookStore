@@ -43,6 +43,7 @@ class BookDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         bar.visibility = View.GONE
+        //mBinding.blurView.visibility = View.VISIBLE
     }
 
     override fun onStop() {
